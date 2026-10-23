@@ -18,6 +18,17 @@ import warnings
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Cross-version compatibility shim for unpickling scikit-learn CyHalfSquaredError
+try:
+    import sklearn._loss.loss
+    sys.modules["_loss"] = sklearn._loss.loss
+except (ImportError, AttributeError):
+    try:
+        import sklearn._loss
+        sys.modules["_loss"] = sklearn._loss
+    except ImportError:
+        pass
+
 # Suppress loky sub-process wmic search warning on Windows
 os.environ["LOKY_MAX_CPU_COUNT"] = "4"
 warnings.filterwarnings("ignore", category=UserWarning)
