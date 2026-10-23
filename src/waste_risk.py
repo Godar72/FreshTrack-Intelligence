@@ -105,14 +105,14 @@ def load_historical_series(
     processed_csv = processed_dir / "store1_history.csv"
 
     # In production containers or lean deployments without 121MB raw train.csv, use pre-extracted series
-    if not train_path.is_file() and (processed_parquet.is_file() or processed_csv.is_file()):
-        if processed_parquet.is_file():
-            cal_df = pd.read_parquet(processed_parquet)
-        else:
+    if not train_path.is_file() and (processed_csv.is_file() or processed_parquet.is_file()):
+        if processed_csv.is_file():
             cal_df = pd.read_csv(processed_csv)
+        else:
+            cal_df = pd.read_parquet(processed_parquet)
         cal_df["date"] = pd.to_datetime(cal_df["date"])
         raw_files = {
-            "train": processed_parquet if processed_parquet.is_file() else processed_csv,
+            "train": processed_csv if processed_csv.is_file() else processed_parquet,
             "stores": data_path / "stores.csv",
             "holidays": data_path / "holidays_events.csv",
         }

@@ -1,6 +1,7 @@
 # Core Data Manipulation and Numerical Computing
 pandas>=2.2.0,<3.0.0
 numpy>=1.26.0,<3.0.0
+pyarrow>=15.0.0
 
 # Machine Learning & Model Persistence
 scikit-learn>=1.4.0,<2.0.0

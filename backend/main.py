@@ -60,6 +60,7 @@ if env_origins:
     ALLOWED_ORIGINS = [orig.strip() for orig in env_origins.split(",") if orig.strip()]
 else:
     ALLOWED_ORIGINS = [
+        "https://fresh-track-intelligence.vercel.app",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://localhost:8501",  # Streamlit if needed
@@ -169,15 +170,23 @@ class MarkdownRequest(BaseModel):
 @app.get("/api/health")
 def health_check():
     """System health check and readiness status."""
-    model, history_df, metrics = get_loaded_resources()
-    return {
-        "status": "healthy",
-        "service": "FreshTrack Intelligence API",
-        "version": "1.4.0",
-        "model_loaded": model is not None,
-        "historical_records": len(history_df) if history_df is not None else 0,
-        "academic_scope": "Store 1 (Quito, Pichincha, Ecuador) · Kaggle Store Sales benchmark",
-    }
+    try:
+        model, history_df, metrics = get_loaded_resources()
+        return {
+            "status": "healthy",
+            "service": "FreshTrack Intelligence API",
+            "version": "1.4.0",
+            "model_loaded": model is not None,
+            "historical_records": len(history_df) if history_df is not None else 0,
+            "academic_scope": "Store 1 (Quito, Pichincha, Ecuador) · Kaggle Store Sales benchmark",
+        }
+    except Exception as e:
+        import traceback
+        return {
+            "status": "degraded",
+            "error": str(e),
+            "traceback": traceback.format_exc(),
+        }
 
 @app.get("/api/metadata")
 def get_metadata():
