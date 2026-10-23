@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #13201a;
+    --primary-forest: #183d32;
+    --primary-container: #28352f;
+    --on-primary: #ffffff;
+    --on-primary-container: #8f9e96;
+    --primary-fixed: #d7e6dd;
+    --primary-fixed-dim: #bbcac1;
+
+    --secondary: #416659;
+    --on-secondary: #ffffff;
+    --secondary-container: #c0e8d8;
+    --on-secondary-container: #456a5d;
+    --secondary-fixed: #c3ebdb;
+
+    --tertiary: #152000;
+    --tertiary-fixed: #d4eba1;
+    --tertiary-leaf: #a8be78;
+
+    --warning-amber: #d99a38;
+
+    --error: #ba1a1a;
+    --error-risk: #b94f42;
+    --on-error: #ffffff;
+    --error-container: #ffdad6;
+    --on-error-container: #93000a;
+
+    --surface: #fbf9f0;
+    --canvas-ivory: #f5f3ea;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f6f4eb;
+    --surface-container: #f0eee5;
+    --surface-container-high: #eae8df;
+    --surface-container-highest: #e4e3da;
+    --surface-dim: #dcdad1;
+    --surface-bright: #fbf9f0;
+
+    --on-surface: #1b1c17;
+    --on-surface-variant: #434845;
+    --outline: #737875;
+    --outline-variant: #c3c8c3;
+    --divider-hairline: #d8d3c5;
+    --divider-secondary: #e2ded4;
+
+    --font-space-grotesk: "Space Grotesk", system-ui, -apple-system, sans-serif;
+    --font-source-serif: "Source Serif 4", Georgia, serif;
+  }
+
+  html,
+  body {
+    background-color: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-source-serif);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Strict Anti-Template Requirement: 0px border-radius throughout the interface */
+  button,
+  input,
+  select,
+  textarea,
+  div.card,
+  div.panel,
+  .badge-tag,
+  .btn,
+  .input-field {
+    border-radius: 0px !important;
+  }
+
+  /* Accessible focus indicators */
+  *:focus-visible {
+    outline: 2px solid var(--primary-forest) !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Typography Utility Classes */
+.font-headline-lg {
+  font-family: var(--font-space-grotesk);
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.font-headline-md {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.font-headline-sm {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.125rem;
+  line-height: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.font-headline-lg-mobile {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.font-display-lg {
+  font-family: var(--font-space-grotesk);
+  font-size: 3.5rem;
+  line-height: 3.75rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.font-data-tabular-lg {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-data-tabular-md {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9375rem;
+  line-height: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-label-lg {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.font-label-md {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.font-label-sm {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.6875rem;
+  line-height: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.font-body-lg {
+  font-family: var(--font-source-serif);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 400;
+}
+
+.font-body-md {
+  font-family: var(--font-source-serif);
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+.font-body-sm {
+  font-family: var(--font-source-serif);
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+/* Material Symbols Outlined Fallback */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Safe areas for mobile viewport testing */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}

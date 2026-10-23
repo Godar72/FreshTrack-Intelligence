@@ -1,0 +1,535 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><title>FreshTrack Intelligence</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-fixed-variant": "#3c4a43", "on-surface-variant": "#434845", "surface-tint": "#54615a", "tertiary-fixed": "#d4eba1", "secondary-fixed-dim": "#a8cfc0", "tertiary": "#152000", "on-error": "#ffffff", "on-secondary-container": "#456a5d", "secondary-fixed": "#c3ebdb", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#b9cf87", "surface-container-high": "#eae8df", "surface-container-low": "#f6f4eb", "surface-dim": "#dcdad1", "on-primary-container": "#8f9e96", "on-tertiary-fixed": "#141f00", "error": "#ba1a1a", "background": "#fbf9f0", "on-primary-fixed": "#111e19", "inverse-surface": "#30312b", "primary-fixed": "#d7e6dd", "inverse-primary": "#bbcac1", "surface-container": "#f0eee5", "surface-container-highest": "#e4e3da", "secondary": "#416659", "on-tertiary-container": "#8da25f", "outline-variant": "#c3c8c3", "primary-fixed-dim": "#bbcac1", "on-secondary-fixed-variant": "#294d42", "on-tertiary-fixed-variant": "#3b4d13", "on-tertiary": "#ffffff", "surface-container-lowest": "#ffffff", "outline": "#737875", "error-container": "#ffdad6", "primary": "#13201a", "surface": "#fbf9f0", "on-error-container": "#93000a", "tertiary-container": "#273700", "on-surface": "#1b1c17", "inverse-on-surface": "#f3f1e8", "surface-variant": "#e4e3da", "secondary-container": "#c0e8d8", "on-primary": "#ffffff", "on-secondary-fixed": "#002118", "primary-container": "#28352f", "on-background": "#1b1c17", "surface-bright": "#fbf9f0" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "2.5rem", "gutter": "1rem", "gutter-lg": "2rem", "margin-md": "2rem", "gutter-md": "1.5rem", "space-2xl": "4rem", "margin": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-lg": "3rem" }, fontFamily: { "display-lg": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "body-lg": ["\"Source Serif 4\""], "data-tabular-lg": ["Space Grotesk"], "label-md": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "label-sm": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-md": ["\"Source Serif 4\""], "data-tabular-md": ["Space Grotesk"], "label-lg": ["Space Grotesk"], "body-sm": ["\"Source Serif 4\""] }, fontSize: { "display-lg": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.04em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }], "data-tabular-lg": ["1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.75rem", { "lineHeight": "0.875rem", "letterSpacing": "0.06em", "fontWeight": "500" }], "headline-md": ["1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "500" }], "label-sm": ["0.6875rem", { "lineHeight": "0.75rem", "letterSpacing": "0.08em", "fontWeight": "500" }], "headline-lg": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "500" }], "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "data-tabular-md": ["0.9375rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "500" }], "label-lg": ["0.875rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }], "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }] } } } };</script><style>@layer base { html, body { width: 100%; margin: 0; padding: 0; background-color: #fbf9f0; } body { overscroll-behavior-y: none; -webkit-tap-highlight-color: transparent; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } ::-webkit-scrollbar { display: none; }</style></head><body class="bg-surface text-on-surface font-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-fixed overflow-x-hidden"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between gap-space-sm max-w-[430px] mx-auto w-full"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Open operational drawer" class="w-11 h-11 -ml-1.5 flex items-center justify-center text-primary hover:bg-surface-container active:bg-surface-container-high transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" id="drawer-open-btn"><span class="material-symbols-outlined text-[24px]">menu</span></button><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-secondary text-[16px]">eco</span><span class="font-label-lg text-label-lg tracking-wider text-primary truncate uppercase">FreshTrack</span></div><div class="flex items-center gap-1.5 mt-0.5"><span class="inline-flex items-center px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-normal">Store 1 · Quito (Prototype Spec)</span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><!-- Operational Slide-over Drawer Modal -->
+<div id="operational-drawer-backdrop" class="fixed inset-0 bg-primary/60 backdrop-blur-sm z-50 hidden transition-opacity opacity-0 flex justify-end">
+  <aside id="operational-drawer-panel" class="w-[82%] max-w-[340px] h-full bg-surface text-on-surface shadow-xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out">
+    <div class="flex flex-col">
+      <!-- Drawer Header -->
+      <div class="h-16 px-4 border-b border-surface-container flex items-center justify-between bg-surface-container-low">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[20px]">eco</span>
+          <span class="font-label-lg text-label-lg tracking-wider text-primary uppercase font-bold">FreshTrack Navigation</span>
+        </div>
+        <button id="drawer-close-btn" aria-label="Close navigation menu" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+          <span class="material-symbols-outlined text-[24px]">close</span>
+        </button>
+      </div>
+      <!-- Store Pilot Context Badge -->
+      <div class="p-3.5 bg-surface-container m-3 flex flex-col gap-1 border-l-2 border-secondary"><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Validation Sandbox</span><p class="font-label-md text-label-md font-bold text-primary">Store 1 · Quito (Pichincha)</p><p class="font-body-sm text-body-sm text-on-surface-variant">Kaggle Store Sales Perishable Pilot · HistGB 10.69% WAPE · Frontend Prototype</p></div>
+      <!-- Navigation Links (Generous Touch Targets >= 44px) -->
+      <nav class="flex flex-col px-2 py-1" aria-label="Operational menu links">
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-primary bg-surface-container font-medium hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-primary">dashboard</span>
+          <span class="font-label-md text-label-md">Overview (Current)</span>
+        </a>
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-secondary">trending_up</span>
+          <span class="font-label-md text-label-md">Demand Forecast</span>
+        </a>
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-secondary">warning</span>
+          <span class="font-label-md text-label-md">Inventory Risk (9 Families)</span>
+        </a>
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-secondary">price_change</span>
+          <span class="font-label-md text-label-md">Markdown Planner</span>
+        </a>
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-secondary">query_stats</span>
+          <span class="font-label-md text-label-md">Model Performance (WAPE)</span>
+        </a>
+        <a href="#" class="h-12 flex items-center gap-3 px-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[20px] text-secondary">store</span>
+          <span class="font-label-md text-label-md">Store 1 Context</span>
+        </a>
+      </nav>
+    </div>
+    <!-- Drawer Footer -->
+    <div class="p-4 border-t border-surface-container text-on-surface-variant text-label-sm font-label-sm bg-surface-container-low flex flex-col gap-1"><span class="font-bold text-primary">FreshTrack Intelligence v1.4</span><span class="">Academic prototype · Historical sales forecasting · Inventory and markdown simulation.</span></div>
+  </aside>
+</div><main class="flex flex-col relative w-full max-w-[430px] mx-auto pt-16 pb-24 bg-surface min-h-screen overflow-x-hidden"><div class="flex flex-col w-full text-on-surface">
+<!-- 1. Header Context -->
+<section class="px-gutter pt-2 pb-4 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Operational Briefing</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 bg-surface-container text-on-surface-variant rounded-none"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Offline Benchmark (Jul 17 – Aug 15, 2017)</span>
+</div>
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Retail overview</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Store 1, Quito, Ecuador <span class="font-label-sm text-label-sm text-outline">(Kaggle Store Sales pilot)</span></p>
+</div>
+<!-- Scope Tag Card -->
+<div class="p-2.5 bg-surface-container-low flex items-start gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5 shrink-0">analytics</span>
+<p class="font-label-sm text-label-sm leading-relaxed text-on-surface-variant">
+<strong class="text-primary font-semibold">9 Perishable Families</strong> · HistGradientBoosting (10.69% WAPE benchmark)
+      </p>
+</div>
+</section>
+<!-- 2. Compact Operational Summaries (2x2 + 1 Grid) -->
+<section class="px-gutter pb-4">
+<div class="grid grid-cols-2 gap-2"><!-- Forecast Demand Card -->
+<div class="p-3 bg-surface-container-low flex flex-col justify-between h-28">
+  <div class="flex items-center justify-between text-on-surface-variant">
+    <span class="font-label-sm text-label-sm uppercase tracking-wider">Forecast Demand</span>
+    <span class="material-symbols-outlined text-[16px] text-secondary">trending_up</span>
+  </div>
+  <div>
+    <div class="font-data-tabular-lg text-data-tabular-lg text-primary">1,120 <span class="font-label-sm text-label-sm font-normal text-on-surface-variant">u</span></div>
+    <div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 truncate">PRODUCE · 4d Horizon</div>
+  </div>
+</div>
+<!-- Expected Surplus Card -->
+<div class="p-3 bg-surface-container-low flex flex-col justify-between h-28">
+  <div class="flex items-center justify-between text-on-surface-variant">
+    <span class="font-label-sm text-label-sm uppercase tracking-wider">Expected Surplus</span>
+    <span class="material-symbols-outlined text-[16px] text-tertiary-container">shopping_bag</span>
+  </div>
+  <div>
+    <div class="font-data-tabular-lg text-data-tabular-lg text-primary">+730 <span class="font-label-sm text-label-sm font-normal text-on-surface-variant">u (39.5%)</span></div>
+    <div class="font-label-sm text-label-sm text-secondary font-medium mt-0.5 truncate">Simulation result</div>
+  </div>
+</div>
+<!-- Benchmark Status -->
+<div class="col-span-2 p-3 bg-surface-container-high flex items-center justify-between">
+  <div class="flex items-center gap-2.5">
+    <div class="w-8 h-8 bg-secondary-container text-secondary flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-[18px]">verified</span>
+    </div>
+    <div>
+      <div class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">Model Benchmark</div>
+      <div class="font-body-sm text-body-sm text-on-surface-variant">Model validation WAPE: 10.69% (Store 1 Kaggle benchmark)</div>
+    </div>
+  </div>
+  <div class="text-right">
+    <span class="inline-block px-1.5 py-0.5 bg-surface-container text-primary font-label-sm text-label-sm font-semibold">HistGB</span>
+  </div>
+</div></div>
+</section>
+<!-- 3. Mobile Chart (Readable SVG) -->
+<section class="px-gutter pb-5"><div class="bg-surface-container-low p-3.5 flex flex-col gap-2.5">
+  <div class="flex flex-col gap-0.5">
+    <div class="flex items-center justify-between">
+      <h2 class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">Demand Trajectory (Store 1)</h2>
+      <span class="font-label-sm text-label-sm text-secondary bg-secondary-container/50 px-1.5 py-0.5 font-medium">HistGB Trained</span>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">Observed sales vs Forecast demand · 9 perishable aggregate</p>
+  </div>
+  <!-- Key Legend with Distinct Indicators -->
+  <div class="flex items-center gap-2.5 py-1 font-label-sm text-label-sm flex-wrap">
+    <div class="flex items-center gap-1.5">
+      <span class="w-3.5 h-1 bg-[#13201a] inline-block"></span>
+      <span class="text-primary font-medium">Observed (Solid)</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-3.5 h-0.5 border-t-2 border-dashed border-[#416659] inline-block"></span>
+      <span class="text-secondary font-medium">Forecast (Dashed)</span>
+    </div>
+    <div class="flex items-center gap-1.5 ml-auto">
+      <span class="w-2 h-2 bg-error rounded-full inline-block"></span>
+      <span class="text-error font-semibold">Origin 07/17</span>
+    </div>
+  </div>
+  <!-- Clean SVG Chart with Clear Contrast & Zero Overflow -->
+  <div class="w-full relative overflow-hidden bg-surface-container py-2">
+    <svg aria-label="Observed sales and forecasted demand chart with Jul 17 origin" class="w-full h-32 select-none" preserveAspectRatio="none" viewBox="0 0 350 140">
+      <!-- Grid Guidelines -->
+      <line stroke="#dcdad1" stroke-dasharray="2 2" stroke-width="0.75" x1="15" x2="335" y1="20" y2="20"></line>
+      <line stroke="#dcdad1" stroke-dasharray="2 2" stroke-width="0.75" x1="15" x2="335" y1="55" y2="55"></line>
+      <line stroke="#dcdad1" stroke-dasharray="2 2" stroke-width="0.75" x1="15" x2="335" y1="90" y2="90"></line>
+      <line stroke="#737875" stroke-width="1" x1="15" x2="335" y1="120" y2="120"></line>
+      <!-- Jul 17 Origin Reference Line -->
+      <line stroke="#ba1a1a" stroke-dasharray="3 2" stroke-width="1.5" x1="165" x2="165" y1="10" y2="120"></line>
+      <rect fill="#ba1a1a" height="12" rx="1" width="58" x="136" y="8"></rect>
+      <text fill="#ffffff" font-family="Space Grotesk" font-size="6.5" font-weight="600" text-anchor="middle" x="165" y="16.5">ORIGIN: JUL 17</text>
+      <!-- Observed Historical Actual Sales: Dark Forest Green Line -->
+      <polyline fill="none" points="15,84 45,78 70,64 95,72 120,50 140,56 165,40" stroke="#13201a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></polyline>
+      <!-- Forecast Demand: Dashed Leaf Green Line -->
+      <polyline fill="none" points="165,40 190,32 215,44 240,24 265,36 295,30 335,46" stroke="#416659" stroke-dasharray="4 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></polyline>
+      <!-- Peak Annotation Point -->
+      <circle cx="240" cy="24" fill="#416659" r="3.5"></circle>
+      <rect fill="#13201a" height="14" rx="1" width="52" x="214" y="5"></rect>
+      <text fill="#ffffff" font-family="Space Grotesk" font-size="7" font-weight="600" text-anchor="middle" x="240" y="14.5">PEAK 2,140 U</text>
+      <!-- Origin Marker Point -->
+      <circle cx="165" cy="40" fill="#ba1a1a" r="3.5"></circle>
+      <!-- Explicit X-Axis Dates -->
+      <text fill="#434845" font-family="Space Grotesk" font-size="7.5" x="15" y="132">Jul 03</text>
+      <text fill="#434845" font-family="Space Grotesk" font-size="7.5" x="82" y="132">Jul 10</text>
+      <text fill="#ba1a1a" font-family="Space Grotesk" font-size="7.5" font-weight="700" x="150" y="132">Jul 17</text>
+      <text fill="#434845" font-family="Space Grotesk" font-size="7.5" x="225" y="132">Jul 24</text>
+      <text fill="#434845" font-family="Space Grotesk" font-size="7.5" x="300" y="132">Aug 15</text>
+    </svg>
+  </div>
+  <!-- Visual Evidence Cards -->
+  <div class="grid grid-cols-2 gap-2 mt-1">
+    <div class="relative h-14 bg-surface-container-high overflow-hidden">
+      <img class="w-full h-full object-cover" data-alt="Close up of fresh Ecuadorian produce stacked neatly in a sunlit retail supermarket display, muted earthy tones, high contrast documentary editorial photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWsywdUD4FqQBK-JlIYninqa_ehG8NWmwR191KmZ6hymeLzZmnuW-ABSkIQOdZ3l0GM8qNmG0Y5cM58PTvF74TAUIsrXvJAieTfhK7Rtj453uTEXcpZyWZnU88Ge5iytigSkWRGxWhh2Lre9lhPtj_B02aRsuy3yIgPsK6DB5oJbgleySQDG7QVjba6x75N_Th89yvzpo_gRmwmJhfoPsrLwjVVpPOx9MtBOPh5XZdaNovy2IZYBBQ">
+      <div class="absolute inset-0 bg-primary/40 flex items-center px-2">
+        <span class="font-label-sm text-label-sm text-on-primary font-medium tracking-wide">Produce Section · 4d Max</span>
+      </div>
+    </div>
+    <div class="relative h-14 bg-surface-container-high overflow-hidden">
+      <img class="w-full h-full object-cover" data-alt="Artisanal bakery and fresh dairy shelves in a modern rustic grocery store aisle, clean directional morning light, natural textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaBgQnRfCU8nJ5cOQJohD7g2DJr45aWQyGMPcJXw9tXSrF1ALj2lJxuEdzh4QEb3joDpXvG9yxqBztOpurYX9hg9_Tludyx1G2gPUgM3j7mWHIdl4slM1abP3IuWO_dAQMG79EaAMOgDxP5fJHCjS3t_YTM1HhOWfJTolJVTwJA8ve3sJBtu2Q3HCzMVoaJTt4ysUOyuc7lLIXJfASRARXTjPoLYnPlWwWnhcET3JRTtzwmYRHKeFy">
+      <div class="absolute inset-0 bg-primary/40 flex items-center px-2">
+        <span class="font-label-sm text-label-sm text-on-primary font-medium tracking-wide">Cold Chain Dairy · 5d Shelf</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+<!-- 4. Concise Mobile Inventory-Priority List -->
+<section class="px-gutter pb-5"><div class="flex items-center justify-between mb-2">
+  <div class="flex items-center gap-1.5">
+    <h2 class="font-headline-sm text-headline-sm text-primary font-semibold">Perishable Risk Roster</h2>
+    <span class="text-label-sm font-label-sm text-on-surface-variant font-medium">(9 Families)</span>
+  </div>
+  <span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Priority Pacing</span>
+</div>
+<div class="p-2 mb-2 bg-surface-container-high/60 flex items-center justify-between font-label-sm text-label-sm">
+  <span class="text-on-surface-variant">Rule-based clearance pacing logic</span>
+  <span class="font-semibold text-primary">HistGB Predicted</span>
+</div>
+<div class="flex flex-col gap-2.5">
+  <!-- Item 1: PRODUCE -->
+  <div class="p-3 bg-surface-container-low flex flex-col gap-2 border border-surface-container">
+    <div class="flex items-start justify-between min-h-[44px]">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-label-lg text-label-lg font-bold text-primary tracking-wide">PRODUCE</span>
+          <span class="px-1.5 py-0.5 bg-error text-on-error font-label-sm text-label-sm uppercase font-semibold">Critical Risk</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Leafy greens, tomatoes, plantains</p>
+      </div>
+      <div class="text-right">
+        <span class="font-data-tabular-md text-data-tabular-md text-error font-bold">+750 u</span>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">exp. surplus</div>
+      </div>
+    </div>
+    <div class="h-11 bg-surface-container px-3 flex items-center justify-between text-on-surface">
+      <div class="flex items-center gap-1 font-label-sm text-label-sm">
+        <span class="text-on-surface-variant">Action:</span>
+        <span class="font-bold text-error">50% Markdown</span>
+      </div>
+      <div class="font-data-tabular-md text-data-tabular-md flex items-center">
+        <span class="line-through text-outline text-label-sm">$2.99</span>
+        <span class="text-primary font-bold ml-1.5 text-[15px]">$1.49</span>
+      </div>
+    </div>
+  </div>
+  <!-- Item 2: DAIRY -->
+  <div class="p-3 bg-surface-container-low flex flex-col gap-2 border border-surface-container">
+    <div class="flex items-start justify-between min-h-[44px]">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-label-lg text-label-lg font-bold text-primary tracking-wide">DAIRY</span>
+          <span class="px-1.5 py-0.5 bg-error text-on-error font-label-sm text-label-sm uppercase font-semibold">Critical Risk</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Whole milk, queso fresco, yogurts</p>
+      </div>
+      <div class="text-right">
+        <span class="font-data-tabular-md text-data-tabular-md text-error font-bold">+730 u</span>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">exp. surplus</div>
+      </div>
+    </div>
+    <div class="h-11 bg-surface-container px-3 flex items-center justify-between text-on-surface"><div class="flex items-center gap-1 font-label-sm text-label-sm"><span class="text-on-surface-variant">Action:</span><span class="font-bold text-error">50% Markdown</span></div><div class="font-data-tabular-md text-data-tabular-md flex items-center"><span class="line-through text-outline text-label-sm">$3.49</span><span class="text-primary font-bold ml-1.5 text-[15px]">$1.74</span></div></div>
+  </div>
+  <!-- Item 3: BREAD / BAKERY -->
+  <div class="p-3 bg-surface-container-low flex flex-col gap-2 border border-surface-container">
+    <div class="flex items-start justify-between min-h-[44px]">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-label-lg text-label-lg font-bold text-primary tracking-wide">BREAD / BAKERY</span>
+          <span class="px-1.5 py-0.5 bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-semibold">High Risk</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Fresh loaves, sweet rolls</p>
+      </div>
+      <div class="text-right">
+        <span class="font-data-tabular-md text-data-tabular-md text-on-surface font-bold">+240 u</span>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">exp. surplus</div>
+      </div>
+    </div>
+    <div class="h-11 bg-surface-container px-3 flex items-center justify-between text-on-surface">
+      <div class="flex items-center gap-1 font-label-sm text-label-sm">
+        <span class="text-on-surface-variant">Action:</span>
+        <span class="font-bold text-primary">30% Markdown</span>
+      </div>
+      <div class="font-data-tabular-md text-data-tabular-md flex items-center">
+        <span class="line-through text-outline text-label-sm">$4.50</span>
+        <span class="text-primary font-bold ml-1.5 text-[15px]">$3.15</span>
+      </div>
+    </div>
+  </div>
+  <!-- Item 4: MEATS -->
+  <div class="p-3 bg-surface-container-low flex flex-col gap-2 border border-surface-container">
+    <div class="flex items-start justify-between min-h-[44px]">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-label-lg text-label-lg font-bold text-primary tracking-wide">MEATS</span>
+          <span class="px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase">Moderate Risk</span>
+        </div>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Beef cuts, pork cuts</p>
+      </div>
+      <div class="text-right">
+        <span class="font-data-tabular-md text-data-tabular-md text-primary font-bold">+160 u</span>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">exp. surplus</div>
+      </div>
+    </div>
+    <div class="h-11 bg-surface-container px-3 flex items-center justify-between text-on-surface">
+      <div class="flex items-center gap-1 font-label-sm text-label-sm">
+        <span class="text-on-surface-variant">Action:</span>
+        <span class="font-medium text-secondary">15% Markdown</span>
+      </div>
+      <div class="font-data-tabular-md text-data-tabular-md flex items-center">
+        <span class="line-through text-outline text-label-sm">$5.80</span>
+        <span class="text-primary font-bold ml-1.5 text-[15px]">$4.93</span>
+      </div>
+    </div>
+  </div>
+  <!-- Item 5: POULTRY -->
+  <!-- Item 5: POULTRY -->
+<div class="p-3 bg-surface-container-low flex flex-col gap-2 border border-surface-container">
+  <div class="flex items-start justify-between min-h-[44px]">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="font-label-lg text-label-lg font-bold text-primary tracking-wide">POULTRY</span>
+        <span class="px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase">Moderate Risk</span>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Chicken cuts, whole poultry</p>
+    </div>
+    <div class="text-right">
+      <span class="font-data-tabular-md text-data-tabular-md text-primary font-bold">+90 u</span>
+      <div class="font-label-sm text-label-sm text-on-surface-variant">exp. surplus</div>
+    </div>
+  </div>
+  <div class="h-11 bg-surface-container px-3 flex items-center justify-between text-on-surface">
+    <div class="flex items-center gap-1 font-label-sm text-label-sm">
+      <span class="text-on-surface-variant">Action:</span>
+      <span class="font-medium text-secondary">15% Markdown</span>
+    </div>
+    <div class="font-data-tabular-md text-data-tabular-md flex items-center">
+      <span class="line-through text-outline text-label-sm">$3.80</span>
+      <span class="text-primary font-bold ml-1.5 text-[15px]">$3.23</span>
+    </div>
+  </div>
+</div>
+  <!-- Item 6: DELI / SEAFOOD / EGGS / PREPARED FOODS -->
+  <div class="p-3 bg-surface-container flex items-center justify-between min-h-[48px]">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+      <div>
+        <div class="font-label-md text-label-md font-bold text-primary uppercase">Deli · Seafood · Eggs · Prepared Foods</div>
+        <div class="font-body-sm text-body-sm text-on-surface-variant">Intake aligned with velocity · 0% Markdown required</div>
+      </div>
+    </div>
+    <span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold shrink-0">Stable</span>
+  </div>
+</div></section>
+<!-- 5. Primary Action & Secondary Action -->
+<section class="px-gutter pb-6 flex flex-col gap-2.5">
+<button class="w-full h-12 bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 active:bg-primary-container transition-colors shadow-sm" id="open-simulation-btn">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+      Run inventory simulation
+    </button>
+<button class="w-full h-12 bg-surface-container-low text-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 active:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+      Explore forecast details
+    </button>
+</section>
+<!-- 6. Mobile Simulation Bottom Sheet Drawer (Interactive & Stateful) -->
+<section class="mx-gutter mb-6 bg-surface-container-low p-4 flex flex-col gap-3 shadow-md" id="simulation-drawer"><div class="flex items-center justify-between pb-2 bg-surface-container px-2.5 py-2 -mx-1 -mt-1 border-b border-surface-container-high">
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+    <h3 class="font-headline-sm text-headline-sm text-primary font-semibold">Simulate Inventory Risk</h3>
+  </div>
+  <span class="font-label-sm text-label-sm text-secondary bg-secondary-container/50 px-2 py-0.5 font-medium">Sandbox</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant -mt-1">User-configured test parameters (offline model simulation)</p>
+
+<!-- 4-State Tab Switcher -->
+<div class="grid grid-cols-4 bg-surface-container p-0.5 text-center font-label-sm text-label-sm">
+  <button class="py-2 bg-primary text-on-primary font-semibold transition-colors focus:outline-none min-h-[40px]" id="tab-form">Inputs</button>
+  <button class="py-2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none min-h-[40px]" id="tab-loading">Loading</button>
+  <button class="py-2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none min-h-[40px]" id="tab-error">Error</button>
+  <button class="py-2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none min-h-[40px]" id="tab-result">Result</button>
+</div>
+
+<!-- State 1: Form Inputs (Default) -->
+<div class="flex flex-col gap-3.5" id="sim-state-form">
+  <!-- Product Family Selector -->
+  <div class="flex flex-col gap-1">
+    <label class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium" for="family-select">Product Family (9 Perishable)</label>
+    <select class="w-full h-12 px-3 bg-surface text-primary font-label-md text-label-md border border-surface-container-highest focus:outline-none focus:border-primary" id="family-select">
+      <option selected="" value="PRODUCE">PRODUCE (Selected)</option>
+      <option value="DAIRY">DAIRY</option>
+      <option value="BREAD/BAKERY">BREAD/BAKERY</option>
+      <option value="MEATS">MEATS</option>
+      <option value="POULTRY">POULTRY</option>
+      <option value="DELI">DELI</option>
+      <option value="SEAFOOD">SEAFOOD</option>
+      <option value="EGGS">EGGS</option>
+      <option value="PREPARED FOODS">PREPARED FOODS</option>
+    </select>
+  </div>
+
+  <!-- Starting Inventory Slider / Display -->
+  <div class="flex flex-col gap-2 bg-surface p-3 border border-surface-container-highest">
+    <div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Simulated Starting Inventory (Input)</span><span class="font-data-tabular-md text-data-tabular-md font-bold text-primary" id="inventory-display">1,850 units</span></div>
+    <input class="w-full accent-primary h-2 bg-surface-container cursor-pointer" id="inventory-slider" max="4000" min="500" step="50" type="range" value="1850">
+    <div class="flex justify-between font-label-sm text-label-sm text-outline">
+      <span class="">500 u</span>
+      <span class="">Baseline: 1,850 u</span>
+      <span class="">4,000 u</span>
+    </div>
+  </div>
+
+  <!-- Remaining Shelf Life Stepper -->
+  <div class="flex flex-col gap-1.5">
+    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">Simulated Shelf Life Parameter (Input)</span>
+    <div class="grid grid-cols-4 gap-1.5" id="shelf-life-group">
+      <button class="h-11 bg-surface font-label-md text-label-md text-on-surface hover:bg-surface-container border border-surface-container transition-colors" type="button">2 Days</button>
+      <button class="h-11 bg-surface font-label-md text-label-md text-on-surface hover:bg-surface-container border border-surface-container transition-colors" type="button">3 Days</button>
+      <button class="h-11 bg-primary font-label-md text-label-md text-on-primary font-semibold transition-colors" type="button">4 Days</button>
+      <button class="h-11 bg-surface font-label-md text-label-md text-on-surface hover:bg-surface-container border border-surface-container transition-colors" type="button">5 Days</button>
+    </div>
+  </div>
+
+  <!-- Calculate Button (Min 44px Touch Target) -->
+  <button class="w-full h-12 bg-secondary text-on-secondary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 active:bg-primary transition-colors shadow-sm mt-1" id="calculate-btn">
+    <span class="material-symbols-outlined text-[18px]">calculate</span>
+    Calculate Simulation
+  </button>
+</div>
+
+<!-- State 2: Loading State (Simulating calculation) -->
+<div class="hidden flex flex-col items-center justify-center py-8 gap-3 bg-surface border border-surface-container" id="sim-state-loading">
+  <div class="w-9 h-9 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
+  <p class="font-label-md text-label-md text-primary font-bold tracking-wide">Executing HistGB Perishable Model...</p>
+  <p class="font-body-sm text-body-sm text-on-surface-variant text-center px-4">Iterating Store 1 transactional weights, holiday offsets &amp; Ecuadorian seasonality</p>
+  <button disabled="" class="mt-2 px-4 py-2 bg-surface-container text-outline font-label-sm text-label-sm uppercase cursor-not-allowed">Processing Parameters...</button>
+</div>
+
+<!-- State 3: Validation Error State -->
+<div class="hidden flex flex-col gap-3" id="sim-state-error">
+  <div class="p-3.5 bg-error-container text-on-error-container border-l-4 border-error flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-error text-[20px]">error</span>
+      <span class="font-label-md text-label-md font-bold uppercase tracking-wider text-error">Simulation Parameter Error</span>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-error-container">
+      <strong>Constraint Violation:</strong> Remaining shelf life for selected perishable family exceeds allowable model boundary. Seafood and delicate produce cannot exceed 4 days in Store 1 ambient cold chain.
+    </p>
+    <div class="font-label-sm text-label-sm text-error font-medium mt-0.5">
+      Code: ERR_PERISHABLE_LIFESPAN_OVERFLOW (Max: 4d for Quito Store 1)
+    </div>
+  </div>
+  <div class="flex items-center justify-between p-2.5 bg-surface border border-surface-container">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">Please adjust shelf life to continue</span>
+    <button class="px-3 py-1.5 bg-primary text-on-primary font-label-sm text-label-sm uppercase font-semibold" id="dismiss-error-btn">
+      Fix Inputs
+    </button>
+  </div>
+</div>
+
+<!-- State 4: Results State -->
+<div class="hidden flex flex-col gap-3" id="sim-state-result">
+  <div class="p-3.5 bg-surface-container flex flex-col gap-2.5 border border-surface-container-high">
+    <div class="flex items-center justify-between">
+      <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">Simulation Output</span>
+      <span class="px-2 py-0.5 bg-error text-on-error font-label-sm text-label-sm uppercase font-bold">High Risk Tier</span>
+    </div>
+    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-surface-container-high">
+      <div>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Cumulative Demand:</span>
+        <div class="font-data-tabular-md text-data-tabular-md font-bold text-primary">1,120 units</div>
+      </div>
+      <div class="text-right">
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Expected Surplus:</span>
+        <div class="font-data-tabular-md text-data-tabular-md font-bold text-error">+730 units</div>
+      </div>
+    </div>
+    <p class="font-body-sm text-body-sm text-on-surface-variant bg-surface p-2 border-l-2 border-error">At simulated 4-day freshness limit, model indicates $2,190 simulated exposure risk without 30% discount execution prior to Jul 21, 2017.</p>
+  </div>
+  <div class="bg-surface p-3 flex items-center justify-between border border-surface-container-highest"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-medium">Proposed Markdown Tier</span><span class="font-label-md text-label-md font-bold text-primary">Begin 30% clearance markdown (High Risk)</span></div><button class="h-10 px-3 bg-surface-container text-primary font-label-sm text-label-sm font-semibold uppercase hover:bg-surface-container-high min-w-[64px]" id="reset-sim-btn">Re-test</button></div>
+</div></section>
+<!-- Editorial Investigative Micro-Footer -->
+<section class="px-gutter pb-4"><div class="p-3 bg-surface-container-low flex flex-col gap-1 text-on-surface-variant"><div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Model Governance &amp; Prototype Notice</span></div><p class="font-body-sm text-body-sm">Evaluated on Kaggle Store Sales validation window (July 17 – August 15, 2017) for Store 1, Quito (Pichincha) across 9 perishable families. Champion model HistGradientBoosting achieved 10.69% WAPE benchmark. Academic prototype · Historical sales forecasting · Inventory and markdown simulation.</p></div></section>
+</div>
+<!-- Inline Interaction Logic -->
+<script>
+  (function initDashboard() {
+    // Inventory Slider Stepper sync
+    const slider = document.getElementById('inventory-slider');
+    const display = document.getElementById('inventory-display');
+    if (slider && display) {
+      slider.addEventListener('input', function(e) {
+        display.textContent = Number(e.target.value).toLocaleString() + ' units';
+      });
+    }
+
+    // Shelf Life button toggles
+    const shelfGroup = document.getElementById('shelf-life-group');
+    if (shelfGroup) {
+      const buttons = shelfGroup.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => {
+            b.className = 'h-10 bg-surface font-label-md text-label-md text-on-surface hover:bg-surface-container';
+          });
+          btn.className = 'h-10 bg-primary font-label-md text-label-md text-on-primary font-semibold';
+        });
+      });
+    }
+
+    // Simulation Drawer State Views
+    const tabForm = document.getElementById('tab-form');
+    const tabLoading = document.getElementById('tab-loading');
+    const tabResult = document.getElementById('tab-result');
+    const stateForm = document.getElementById('sim-state-form');
+    const stateLoading = document.getElementById('sim-state-loading');
+    const stateResult = document.getElementById('sim-state-result');
+    const calcBtn = document.getElementById('calculate-btn');
+    const resetBtn = document.getElementById('reset-sim-btn');
+    const openSimBtn = document.getElementById('open-simulation-btn');
+
+    function setActiveTab(activeTab, showElement) {
+      [tabForm, tabLoading, tabResult].forEach(t => {
+        t.className = 'flex-1 py-1.5 text-on-surface-variant hover:text-primary';
+      });
+      activeTab.className = 'flex-1 py-1.5 bg-primary text-on-primary font-semibold';
+
+      [stateForm, stateLoading, stateResult].forEach(s => s.classList.add('hidden'));
+      showElement.classList.remove('hidden');
+    }
+
+    if (tabForm && tabLoading && tabResult) {
+      tabForm.addEventListener('click', () => setActiveTab(tabForm, stateForm));
+      tabLoading.addEventListener('click', () => setActiveTab(tabLoading, stateLoading));
+      tabResult.addEventListener('click', () => setActiveTab(tabResult, stateResult));
+    }
+
+    if (calcBtn) {
+      calcBtn.addEventListener('click', () => {
+        setActiveTab(tabLoading, stateLoading);
+        setTimeout(() => {
+          setActiveTab(tabResult, stateResult);
+        }, 900);
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        setActiveTab(tabForm, stateForm);
+      });
+    }
+
+    if (openSimBtn) {
+      openSimBtn.addEventListener('click', () => {
+        const drawer = document.getElementById('simulation-drawer');
+        if (drawer) {
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setActiveTab(tabForm, stateForm);
+        }
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 left-0 right-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs max-w-[430px] mx-auto w-full"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary text-primary font-semibold" data-path="overview" href="#"><span class="material-symbols-outlined text-[22px]">dashboard</span><span class="font-label-sm text-label-sm">Overview</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary" data-path="forecast" href="#"><span class="material-symbols-outlined text-[22px]">trending_up</span><span class="font-label-sm text-label-sm">Forecast</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary" data-path="inventory" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-sm text-label-sm">Inventory</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-primary" data-path="markdown" href="#"><span class="material-symbols-outlined text-[22px]">price_change</span><span class="font-label-sm text-label-sm">Markdown</span></a></div></nav>
+
+</body></html>

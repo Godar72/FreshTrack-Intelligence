@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_blank" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed-variant": "#3c4a43", "on-surface-variant": "#434845", "surface-tint": "#54615a", "tertiary-fixed": "#d4eba1", "secondary-fixed-dim": "#a8cfc0", "tertiary": "#152000", "on-error": "#ffffff", "on-secondary-container": "#456a5d", "secondary-fixed": "#c3ebdb", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#b9cf87", "surface-container-high": "#eae8df", "surface-container-low": "#f6f4eb", "surface-dim": "#dcdad1", "on-primary-container": "#8f9e96", "on-tertiary-fixed": "#141f00", "error": "#ba1a1a", "background": "#fbf9f0", "on-primary-fixed": "#111e19", "inverse-surface": "#30312b", "primary-fixed": "#d7e6dd", "inverse-primary": "#bbcac1", "surface-container": "#f0eee5", "surface-container-highest": "#e4e3da", "secondary": "#416659", "on-tertiary-container": "#8da25f", "outline-variant": "#c3c8c3", "primary-fixed-dim": "#bbcac1", "on-secondary-fixed-variant": "#294d42", "on-tertiary-fixed-variant": "#3b4d13", "on-tertiary": "#ffffff", "surface-container-lowest": "#ffffff", "outline": "#737875", "error-container": "#ffdad6", "primary": "#13201a", "surface": "#fbf9f0", "on-error-container": "#93000a", "tertiary-container": "#273700", "on-surface": "#1b1c17", "inverse-on-surface": "#f3f1e8", "surface-variant": "#e4e3da", "secondary-container": "#c0e8d8", "on-primary": "#ffffff", "on-secondary-fixed": "#002118", "primary-container": "#28352f", "on-background": "#1b1c17", "surface-bright": "#fbf9f0" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "2.5rem", "gutter": "1rem", "gutter-lg": "2rem", "margin-md": "2rem", "gutter-md": "1.5rem", "space-2xl": "4rem", "margin": "1rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xs": "0.25rem", "margin-lg": "3rem" }, "fontFamily": { "display-lg": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "body-lg": [ "\"Source Serif 4\"" ], "data-tabular-lg": [ "Space Grotesk" ], "label-md": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "headline-lg-mobile": [ "Space Grotesk" ], "label-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-md": [ "\"Source Serif 4\"" ], "data-tabular-md": [ "Space Grotesk" ], "label-lg": [ "Space Grotesk" ], "body-sm": [ "\"Source Serif 4\"" ] }, "fontSize": { "display-lg": [ "3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.04em", "fontWeight": "600" } ], "headline-sm": [ "1.125rem", { "lineHeight": "1.375rem", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" } ], "data-tabular-lg": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "label-md": [ "0.75rem", { "lineHeight": "0.875rem", "letterSpacing": "0.06em", "fontWeight": "500" } ], "headline-md": [ "1.5rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "headline-lg-mobile": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "label-sm": [ "0.6875rem", { "lineHeight": "0.75rem", "letterSpacing": "0.08em", "fontWeight": "500" } ], "headline-lg": [ "2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.03em", "fontWeight": "500" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "fontWeight": "400" } ], "data-tabular-md": [ "0.9375rem", { "lineHeight": "1.125rem", "letterSpacing": "0.01em", "fontWeight": "500" } ], "label-lg": [ "0.875rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" } ] } } } }</script></head><body class="bg-background text-on-surface font-body-md antialiased selection:bg-secondary selection:text-on-secondary"><header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md"><div class="h-16 w-full px-margin-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><span class="font-label-lg text-label-lg tracking-wider uppercase text-primary font-bold">FreshTrack Intelligence</span><span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant px-space-xs py-0.5 bg-surface-container-high">Ledger v4.2</span></div><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-semibold"><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" data-path="academic-benchmark" href="#">Academic Benchmark</a><a aria-current="page" class="uppercase tracking-wider transition-colors text-primary font-semibold" data-path="login" href="#">Terminal Access</a></nav></div></header><main class="w-full pt-16 min-h-screen bg-background"><div class="flex flex-col w-full">
+<div class="w-full px-margin md:px-margin-md lg:px-margin-lg py-space-xl">
+<div class="max-w-[1340px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-stretch">
+<!-- Left Column: Authentication Portal & State Inspector -->
+<div class="lg:col-span-6 xl:col-span-5 flex flex-col justify-between">
+<!-- Main Form Panel -->
+<div class="bg-surface-container-lowest p-space-xl md:p-space-2xl shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[720px]">
+<!-- Top Metatag & Header -->
+<div>
+<div class="flex items-center justify-between gap-space-sm mb-space-lg">
+<span class="inline-flex items-center gap-space-xs px-space-sm py-1 bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest"><span class="w-2 h-2 bg-secondary inline-block"></span> Terminal Interface (Mock Scope)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">
+                Proto Auth v0.9.4
+              </span>
+</div>
+<div class="space-y-space-xs mb-space-lg">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">
+                FreshTrack Intelligence
+              </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Demand forecasting &amp; perishable inventory decision support.
+              </p>
+</div>
+<!-- Academic Prototype Notice -->
+<div class="bg-surface-container-low p-space-md mb-space-xl"><div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] select-none mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+<strong class="font-label-sm text-label-sm uppercase tracking-wider block text-primary mb-1">Frontend Prototype Interface</strong>
+Evaluative authentication interface awaiting production identity provider integration. No live credentials, backend directory lookups, or user accounts are connected. Interactive controls demonstrate UI validation and state handling only.
+</p>
+</div></div>
+<!-- Interactive State Switcher Bar (For Reviewers) -->
+<div class="mb-space-lg bg-surface-container-high p-space-xs">
+<div class="flex items-center justify-between px-space-xs py-1">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tune</span> Prototype State Matrix:
+</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold" id="state-indicator-badge">1 / DEFAULT (LOGIN)</span>
+</div>
+<div aria-label="Prototype Authentication States" class="grid grid-cols-5 gap-1 mt-1" role="tablist">
+<button aria-controls="auth-form" aria-selected="true" class="state-tab-btn py-1 px-1.5 text-center font-label-sm text-label-sm transition-colors bg-primary text-on-primary font-medium" id="tab-default" onclick="setFormState('default')" role="tab" type="button">
+Default
+</button>
+<button aria-controls="auth-form" aria-selected="false" class="state-tab-btn py-1 px-1.5 text-center font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary hover:bg-surface-container" id="tab-error" onclick="setFormState('error')" role="tab" type="button">
+Error
+</button>
+<button aria-controls="auth-form" aria-selected="false" class="state-tab-btn py-1 px-1.5 text-center font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary hover:bg-surface-container" id="tab-reset" onclick="setFormState('reset')" role="tab" type="button">
+Reset
+</button>
+<button aria-controls="auth-form" aria-selected="false" class="state-tab-btn py-1 px-1.5 text-center font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary hover:bg-surface-container" id="tab-register" onclick="setFormState('register')" role="tab" type="button">
+Register
+</button>
+<button aria-controls="auth-form" aria-selected="false" class="state-tab-btn py-1 px-1.5 text-center font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary hover:bg-surface-container" id="tab-loading" onclick="setFormState('loading')" role="tab" type="button">
+Loading
+</button>
+</div>
+</div>
+<!-- Error Banner (State Dependent) -->
+<div aria-live="assertive" class="hidden mb-space-lg bg-error-container text-on-error-container p-space-md" id="error-alert" role="alert"><div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-error select-none text-[22px]">error</span>
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold tracking-wide text-error uppercase">Authentication Verification Failed</p>
+<p class="font-body-sm text-body-sm text-on-error-container leading-relaxed">
+The credentials entered do not match authorized access parameters. (Prototype state: simulated invalid credentials test).</p>
+</div>
+</div></div>
+<!-- Password Reset Notice (State Dependent) -->
+<div aria-live="polite" class="hidden mb-space-lg bg-secondary-container text-on-secondary-container p-space-md" id="reset-alert" role="region"><div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary select-none text-[22px]">lock_reset</span>
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold tracking-wide uppercase text-on-secondary-fixed">Password Reset Workflow (Prototype)</p>
+<p class="font-body-sm text-body-sm leading-relaxed" id="reset-alert-text">
+Enter your institutional email to simulate recovery flow. Note: No emails or recovery tokens are dispatched in this prototype mode.
+</p>
+</div>
+</div></div>
+<div aria-live="polite" class="hidden mb-space-lg bg-surface-container-high text-on-surface p-space-md" id="register-alert" role="region"><div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary select-none text-[22px]">how_to_reg</span>
+<div class="space-y-1">
+<p class="font-label-md text-label-md font-semibold tracking-wide uppercase text-primary">Partner Access Request (Prototype)</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+This view previews access invitation and code verification fields. Submissions are for interface validation only.
+</p>
+</div>
+</div></div>
+<!-- Main Form Wrapper -->
+<form class="space-y-space-lg" id="auth-form" onsubmit="event.preventDefault(); simulateSubmit();">
+<!-- Institutional Affiliation Code (Shown in Registration State) -->
+<div class="hidden space-y-space-xs" id="partner-code-container"><div class="flex justify-between items-center">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold" for="partner-code">
+Evaluation Access Code
+</label>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Prototype Scope</span>
+</div>
+<div class="relative">
+<input autocomplete="off" class="w-full bg-surface-container-low text-on-surface font-label-md text-label-md px-space-md py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="partner-code" name="partner-code" placeholder="PRV-EVAL-TOKEN-01" type="text" value="">
+<div class="absolute right-3 top-3.5 text-secondary select-none pointer-events-none">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter an assigned prototype invitation token for sandbox evaluation.</p></div>
+
+<!-- Email Input Block -->
+<div class="space-y-space-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold" for="email">
+Institutional Email Address <span aria-hidden="true" class="text-error">*</span>
+</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Institutional / Corporate ID</span>
+</div>
+<div class="relative">
+<input autocomplete="email" class="w-full bg-surface-container-low text-on-surface font-label-md text-label-md px-space-md py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="email" name="email" placeholder="analyst@organization.org" required="" type="email" value="">
+<div class="absolute right-3 top-3.5 text-on-surface-variant select-none pointer-events-none">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+</div>
+</div>
+</div>
+
+<!-- Password Input Block (Hidden in Reset State) -->
+<div class="space-y-space-xs" id="password-container">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold" for="password">
+Credential Token / Password <span aria-hidden="true" class="text-error">*</span>
+</label>
+<button class="font-label-sm text-label-sm text-secondary hover:text-primary uppercase tracking-wider underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-primary" onclick="setFormState('reset')" type="button">
+Forgot password?
+</button>
+</div>
+<div class="relative">
+<input autocomplete="current-password" class="w-full bg-surface-container-low text-on-surface font-label-md text-label-md px-space-md py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="password" name="password" placeholder="••••••••••••" required="" type="password" value="">
+<button aria-label="Show password as plain text" aria-pressed="false" class="absolute right-0 top-0 bottom-0 px-space-md flex items-center justify-center text-on-surface-variant hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary transition-colors" id="toggle-password-btn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[20px] select-none" id="password-visibility-icon">visibility_off</span>
+</button>
+</div>
+</div>
+
+<!-- Checkbox & Access Mode (Hidden in Reset State) -->
+<div class="flex items-center justify-between pt-1" id="remember-container">
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded-none accent-primary text-on-primary bg-surface-container-low focus:ring-2 focus:ring-primary cursor-pointer" id="remember" name="remember" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Remember institutional workstation</span>
+</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5">TLS 1.3 Strict</span>
+</div>
+
+<!-- Action Submit Button -->
+<div class="pt-space-xs">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3.5 px-space-lg font-label-md text-label-md uppercase tracking-widest font-semibold transition-all flex items-center justify-center gap-space-sm cursor-pointer active:translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" id="submit-button" type="submit">
+<span class="material-symbols-outlined text-[20px]" id="button-icon">login</span>
+<span id="button-text" class="">Sign In to FreshTrack</span>
+<div class="hidden w-5 h-5 border-2 border-on-primary border-t-transparent animate-spin rounded-full" id="button-spinner"></div>
+</button>
+</div>
+</form>
+<!-- Reset Return Link -->
+<div class="hidden mt-space-md text-center" id="reset-back-container">
+<button class="font-label-sm text-label-sm uppercase tracking-wider text-secondary hover:text-primary flex items-center justify-center gap-1 mx-auto" onclick="setFormState('default')" type="button">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Return to standard authentication
+              </button>
+</div>
+<!-- Alternative Academic Access Link -->
+<div class="mt-space-lg text-center">
+<button class="inline-block font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors underline underline-offset-4 focus:outline-none focus:ring-1 focus:ring-primary" onclick="setFormState('register')" type="button">
+Request Academic Access / Institutional Partner Grant Registration
+</button>
+</div>
+</div>
+<!-- Bottom Micro-Footer Links -->
+<div class="pt-space-xl mt-space-lg bg-surface-container-lowest">
+<div class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<a class="hover:text-primary transition-colors" href="#">Terms of Research Use</a>
+<span class="text-surface-dim">/</span>
+<a class="hover:text-primary transition-colors" href="#">Data Privacy Policy</a>
+<span class="text-surface-dim">/</span>
+<a class="hover:text-primary transition-colors" href="#">Methodology Ledger</a>
+</div>
+<div class="mt-space-xs text-[10px] text-on-surface-variant font-data-tabular-md uppercase tracking-widest">Prototype Build Hash: 7b84f29...preview-ui</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Complementary Brand & Research Context Panel -->
+<div class="lg:col-span-6 xl:col-span-7 flex flex-col justify-between gap-gutter-lg">
+<!-- Architectural Overview Card -->
+<div class="bg-surface-container p-space-xl md:p-space-2xl shadow-md flex-1 flex flex-col justify-between">
+<div>
+<!-- Monospaced Category Tag -->
+<div class="flex items-center gap-space-sm mb-space-md">
+<span class="px-space-xs py-0.5 bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-widest font-semibold">
+                Dataset: Quito_Store_01
+              </span>
+<span class="font-data-tabular-md text-data-tabular-md text-on-surface-variant tracking-wider">
+                Records: 3,000,888 POS Logs
+              </span>
+</div>
+<!-- Headline -->
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold mb-space-md">
+              Empirical retail intelligence grounded in historical demand.
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface mb-space-xl leading-relaxed">
+              Synthesizing algorithmic forecasting with structural inventory risk mitigation. Designed for supermarket category leaders evaluating short shelf-life categories under acute promotional volatility.
+            </p>
+<!-- Quantitative Research Architecture Highlights -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mb-space-xl">
+<div class="bg-surface-container-lowest p-space-md">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Validation Precision</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">query_stats</span>
+</div>
+<div class="font-data-tabular-lg text-data-tabular-lg text-primary font-bold">10.69% WAPE</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  HistGradientBoosting recursive regressor across Store 1 perishable SKU partitions.
+                </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Benchmark Node</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">location_on</span>
+</div>
+<div class="font-data-tabular-lg text-data-tabular-lg text-primary font-bold">Quito, Ecuador</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Store 1 Kaggle benchmark dataset tracking daily unit volume from 2013 through 2017.
+                </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Categorical Scope</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">inventory_2</span>
+</div>
+<div class="font-data-tabular-lg text-data-tabular-lg text-primary font-bold">9 Fresh Families</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Bread, Dairy, Deli, Eggs, Meats, Poultry, Prepared Foods, Produce, and Seafood.
+                </p>
+</div>
+<div class="bg-surface-container-lowest p-space-md">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Safety Logic</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">shield</span>
+</div>
+<div class="font-data-tabular-lg text-data-tabular-lg text-primary font-bold">Monte Carlo Engine</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Simulation-driven surplus degradation &amp; dynamic margin floor buffers.
+                </p>
+</div>
+</div>
+<!-- Pipeline Diagram / Architectural Schematic (Inline Vector) -->
+<div class="bg-surface-container-lowest p-space-md mb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">
+                  Forecast Execution Pipeline: Lag 1..16 -&gt; Recursive Inference
+                </span>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Deterministic DAG</span>
+</div>
+<div class="w-full overflow-x-auto py-2">
+<svg class="w-full text-on-surface-variant" fill="none" viewBox="0 0 760 90" xmlns="http://www.w3.org/2000/svg">
+<!-- Node 1 -->
+<rect fill="#f0eee5" height="70" width="160" x="2" y="10"></rect>
+<text fill="#1b1c17" font-family="'Space Grotesk', monospace" font-size="11" font-weight="600" letter-spacing="0.06em" x="14" y="32">01. POS TIME-SERIES</text>
+<text fill="#434845" font-family="'Source Serif 4', serif" font-size="11" x="14" y="52">Sales, Oil Index, Earthquakes</text>
+<text fill="#416659" font-family="'Space Grotesk', monospace" font-size="10" x="14" y="68">2013-01 to 2017-08</text>
+<!-- Arrow 1-2 -->
+<path d="M165 45 L 195 45" stroke="#737875" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#737875" points="195,41 201,45 195,49"></polygon>
+<!-- Node 2 -->
+<rect fill="#f0eee5" height="70" width="160" x="205" y="10"></rect>
+<text fill="#1b1c17" font-family="'Space Grotesk', monospace" font-size="11" font-weight="600" letter-spacing="0.06em" x="217" y="32">02. FEATURE MATRIX</text>
+<text fill="#434845" font-family="'Source Serif 4', serif" font-size="11" x="217" y="52">Rolling 7/14/28d, Paydays</text>
+<text fill="#416659" font-family="'Space Grotesk', monospace" font-size="10" x="217" y="68">Promo Impact Factors</text>
+<!-- Arrow 2-3 -->
+<path d="M368 45 L 398 45" stroke="#737875" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#737875" points="398,41 404,45 398,49"></polygon>
+<!-- Node 3 -->
+<rect fill="#f0eee5" height="70" width="160" x="408" y="10"></rect>
+<text fill="#1b1c17" font-family="'Space Grotesk', monospace" font-size="11" font-weight="600" letter-spacing="0.06em" x="420" y="32">03. HIST-GRAD-BOOST</text>
+<text fill="#434845" font-family="'Source Serif 4', serif" font-size="11" x="420" y="52">L2 Tree Loss Minimization</text>
+<text fill="#416659" font-family="'Space Grotesk', monospace" font-size="10" x="420" y="68">WAPE Target: &lt;11%</text>
+<!-- Arrow 3-4 -->
+<path d="M571 45 L 601 45" stroke="#737875" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<polygon fill="#737875" points="601,41 607,45 601,49"></polygon>
+<!-- Node 4 -->
+<rect fill="#13201a" height="70" width="145" x="611" y="10"></rect>
+<text fill="#ffffff" font-family="'Space Grotesk', monospace" font-size="11" font-weight="600" letter-spacing="0.06em" x="623" y="32">04. DECISION FEED</text>
+<text fill="#bbcac1" font-family="'Source Serif 4', serif" font-size="11" x="623" y="52">Surplus &amp; Floor Bounds</text>
+<text fill="#d4eba1" font-family="'Space Grotesk', monospace" font-size="10" x="623" y="68">Perishable Dispatch</text>
+</svg>
+</div>
+</div>
+</div>
+<!-- Academic Rigor & Honesty Statement Block -->
+<div class="bg-surface-container-highest p-space-md mt-space-md"><div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px] select-none mt-0.5">verified_user</span>
+<div>
+<h3 class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold mb-1">
+Methodological Scope &amp; Prototype Bounds
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+This interface is an analytical decision-support prototype evaluating historical point-of-sale patterns. It operates offline against Kaggle Store Sales records without live store connectivity, external auth federations, or claimed automated inventory dispatches.
+</p>
+</div>
+</div></div>
+</div>
+<!-- Secondary Research Vignette Card -->
+<div class="bg-primary text-on-primary p-space-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md shadow-md">
+<div class="space-y-1">
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed">Quito Municipal Market Study</div>
+<p class="font-body-md text-body-md text-surface-container-high italic">
+              “Forecasting perishable retail demands algorithmic temperance: minimizing markdowns without risking stock-out penalties in staples.”
+            </p>
+<p class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">
+              Prof. M. Alvear, Center for Logistics Research &amp; Retail Systems
+            </p>
+</div>
+<div class="shrink-0 flex items-center gap-space-sm">
+<span class="w-10 h-10 bg-primary-container flex items-center justify-center font-data-tabular-md font-bold text-tertiary-fixed">
+              EC
+            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let currentState = 'default';
+
+  function setFormState(state) {
+    currentState = state;
+    
+    // UI elements
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const passContainer = document.getElementById('password-container');
+    const rememberContainer = document.getElementById('remember-container');
+    const submitBtn = document.getElementById('submit-button');
+    const btnText = document.getElementById('button-text');
+    const btnIcon = document.getElementById('button-icon');
+    const btnSpinner = document.getElementById('button-spinner');
+    const errorAlert = document.getElementById('error-alert');
+    const resetAlert = document.getElementById('reset-alert');
+    const resetBack = document.getElementById('reset-back-container');
+    const badge = document.getElementById('state-indicator-badge');
+
+    // Update active tab buttons
+    document.querySelectorAll('.state-tab-btn').forEach(btn => {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('text-on-surface-variant');
+      btn.setAttribute('aria-selected', 'false');
+    });
+
+    const activeBtn = document.getElementById(`tab-${state}`);
+    if (activeBtn) {
+      activeBtn.classList.remove('text-on-surface-variant');
+      activeBtn.classList.add('bg-primary', 'text-on-primary');
+      activeBtn.setAttribute('aria-selected', 'true');
+    }
+
+    // Reset base configurations
+    errorAlert.classList.add('hidden');
+    resetAlert.classList.add('hidden');
+    passContainer.classList.remove('hidden');
+    rememberContainer.classList.remove('hidden');
+    resetBack.classList.add('hidden');
+    submitBtn.disabled = false;
+    btnSpinner.classList.add('hidden');
+    btnIcon.classList.remove('hidden');
+    emailInput.classList.remove('bg-error-container', 'text-on-error-container');
+    passwordInput.classList.remove('bg-error-container', 'text-on-error-container');
+
+    if (state === 'default') {
+      badge.textContent = '1 / DEFAULT';
+      btnText.textContent = 'Sign In to FreshTrack';
+      btnIcon.textContent = 'login';
+      emailInput.value = 'c.andrade@espe.edu.ec';
+      passwordInput.value = 'KaggleStore1@Model9Val';
+    } 
+    else if (state === 'error') {
+      badge.textContent = '2 / INVALID_AUTH';
+      errorAlert.classList.remove('hidden');
+      emailInput.classList.add('bg-error-container', 'text-on-error-container');
+      passwordInput.classList.add('bg-error-container', 'text-on-error-container');
+      btnText.textContent = 'Retry Institutional Sign In';
+      btnIcon.textContent = 'restart_alt';
+      passwordInput.value = 'wrong_experimental_token';
+    } 
+    else if (state === 'reset') {
+      badge.textContent = '3 / RESET_DISPATCH';
+      resetAlert.classList.remove('hidden');
+      passContainer.classList.add('hidden');
+      rememberContainer.classList.add('hidden');
+      resetBack.classList.remove('hidden');
+      btnText.textContent = 'Send Auth Challenge Link';
+      btnIcon.textContent = 'mail';
+    } 
+    else if (state === 'loading') {
+      badge.textContent = '4 / EVALUATING...';
+      submitBtn.disabled = true;
+      btnIcon.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+      btnText.textContent = 'Verifying Store 1 Identity...';
+    }
+  }
+
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const icon = document.getElementById('password-visibility-icon');
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      icon.textContent = 'visibility';
+    } else {
+      passwordInput.type = 'password';
+      icon.textContent = 'visibility_off';
+    }
+  }
+
+  function simulateSubmit() {
+    if (currentState === 'loading') return;
+    setFormState('loading');
+    setTimeout(() => {
+      setFormState('default');
+    }, 2200);
+  }
+</script></main>
+
+</body></html>

@@ -1,0 +1,15 @@
+# Robots.txt for FreshTrack Intelligence Academic Prototype
+User-agent: *
+Allow: /
+Allow: /overview
+Allow: /demand-forecast
+Allow: /inventory-risk
+Allow: /markdown-planner
+Allow: /model-performance
+Allow: /mobile
+Allow: /login
+
+# Disallow internal API direct crawling
+Disallow: /api/
+
+Sitemap: http://localhost:3000/sitemap.xml

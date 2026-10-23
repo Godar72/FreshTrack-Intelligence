@@ -1,0 +1,19 @@
+# Core Data Manipulation and Numerical Computing
+pandas>=2.2.0,<3.0.0
+numpy>=1.26.0,<3.0.0
+
+# Machine Learning & Model Persistence
+scikit-learn>=1.4.0,<2.0.0
+joblib>=1.4.0,<2.0.0
+
+# Interactive Dashboard and Visualization
+streamlit>=1.35.0,<2.0.0
+plotly>=5.20.0,<7.0.0
+
+# REST API Service
+fastapi>=0.110.0,<1.0.0
+uvicorn>=0.28.0,<1.0.0
+pydantic>=2.6.0,<3.0.0
+
+# Testing and Code Quality
+pytest>=8.0.0,<10.0.0

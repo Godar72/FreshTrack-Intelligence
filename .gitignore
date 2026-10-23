@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Project Data (raw train data is ignored to avoid committing large 120MB datasets)
+data/raw/train.csv
+data/raw/train.csv.zip
+!data/raw/stores.csv
+!data/raw/holidays_events.csv
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/store1_history.parquet
+!data/processed/store1_history.csv
+
+# Model Artifacts (allow production model and evaluation metrics)
+models/*
+!models/.gitkeep
+!models/demand_forecast_model.joblib
+!models/evaluation_metrics.json
+*.pkl
+*.zip
+
+
+# Streamlit config / cache
+.streamlit/secrets.toml
+
+# Environment variables & credentials
+.env
+.env.*
+!.env.example
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Frontend & Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/test-results/
+frontend/playwright-report/
+frontend/.playwright/
