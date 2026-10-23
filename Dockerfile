@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Prevent Python from writing .pyc files and buffer stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=8000 \
+    PORT=7860 \
     HOST=0.0.0.0
 
 WORKDIR /app
@@ -32,7 +32,7 @@ RUN useradd -m -u 1001 appuser && \
     chown -R appuser:appuser /app
 USER appuser
 
-EXPOSE 8000
+EXPOSE 7860
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:${PORT}/api/health || exit 1

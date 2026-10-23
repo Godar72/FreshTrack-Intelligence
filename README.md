@@ -1,3 +1,13 @@
+---
+title: FreshTrack Intelligence API
+emoji: 🥬
+colorFrom: green
+colorTo: emerald
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # AI-Based Retail Food Waste Prediction & Dynamic Markdown Recommendation System
 
 An end-to-end, explainable machine learning and decision-support system designed for grocery and supermarket retailers to minimize perishable food spoilage and optimize revenue recovery before product expiration.
