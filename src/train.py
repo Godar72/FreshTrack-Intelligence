@@ -286,6 +286,18 @@ def load_trained_forecast_model(
     path = Path(model_path)
     if not path.is_file():
         raise FileNotFoundError(f"Trained model artifact not found at: {path}")
+
+    # Cross-version compatibility shim for scikit-learn CyHalfSquaredError unpickling
+    try:
+        import sklearn._loss.loss
+        sys.modules["_loss"] = sklearn._loss.loss
+    except (ImportError, AttributeError):
+        try:
+            import sklearn._loss
+            sys.modules["_loss"] = sklearn._loss
+        except ImportError:
+            pass
+
     payload = joblib.load(path)
     return payload["pipeline"], payload["metadata"]
 
