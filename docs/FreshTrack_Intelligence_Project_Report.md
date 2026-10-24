@@ -384,6 +384,23 @@ The codebase is validated through two automated test suites:
   - `mobile-360` (360 × 740): 9 / 9 passed
 - Validates: Zero horizontal scrollbar overflow, zero uncaught console errors, live API proxying, and responsive UI layout.
 
+### 12.3 Public Production Cloud Deployment Verification
+To facilitate faculty evaluation and remote demonstration, FreshTrack Intelligence is deployed across a decoupled production cloud architecture:
+
+1. **Production URLs:**
+   - **Public Frontend Web Application:** `https://fresh-track-intelligence.vercel.app` (Prerendered and served globally on the Vercel Edge Network)
+   - **Public Backend Decision API:** `https://freshtrack-intelligence.onrender.com` (Python FastAPI service on Render Cloud Container Infrastructure)
+   - **System Healthcheck Endpoint:** `https://freshtrack-intelligence.onrender.com/api/health`
+   - **Interactive API Documentation (Swagger):** `https://freshtrack-intelligence.onrender.com/docs`
+
+2. **Decoupled Edge-to-Backend Architecture:**
+   - The Next.js 16 frontend proxies client requests through server-side edge rewrites (`/api/:path*` -> `${BACKEND_API_URL}/api/:path*`), completely concealing internal API topologies and enforcing strict HTTPS server-to-server communication.
+   - Restrictive Cross-Origin Resource Sharing (CORS) is configured on FastAPI to authorize the production origin `https://fresh-track-intelligence.vercel.app`.
+
+3. **Cloud Resource Optimization & Cold-Start Behavior:**
+   - The production container utilizes pre-extracted historical feature slices (`data/processed/store1_history.parquet`, 47 KB), avoiding the downloading of 121 MB raw training files and enabling rapid container startups within 512 MB memory allocations.
+   - As an academic prototype hosted on free-tier infrastructure, the Render backend spins down after 15 minutes of inactivity; the initial cold-start request requires approximately 30 seconds to re-warm the in-memory cache and model pipeline.
+
 ---
 
 ## 13. Simulation Assumptions, Academic Disclaimers, and Limitations

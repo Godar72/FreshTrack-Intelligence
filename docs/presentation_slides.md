@@ -196,13 +196,17 @@
   - **Playwright Browser E2E Suite:** **54 / 54 Passed (100%)** in 44.1s.
     - Verified across 6 viewports (Desktop 1440px, Laptop 1280px, Tablet 768px, Mobile 430px, 390px, 360px).
     - Verified: Zero horizontal scrollbar overflow, zero console errors, live API proxying.
-- **Security & Integrity:** Whitelisted CORS (`localhost:3000`, `127.0.0.1:3000`), Pydantic bounds sanitization, zero hardcoded secrets, prototype login disclosure.
+- **Security & Integrity:** Whitelisted CORS, Pydantic bounds sanitization, zero hardcoded secrets, prototype login disclosure.
+- **Live Production Deployment:**
+  - **Public Web Application:** `https://fresh-track-intelligence.vercel.app` (Vercel Edge Network)
+  - **Public Backend API:** `https://freshtrack-intelligence.onrender.com` (Render Cloud Container)
+  - **Healthcheck & Docs:** `/api/health` and `/docs` active and operational.
 
 ### Speaker Notes (8:00 – 8:45)
-> "Our implementation has been rigorously verified through comprehensive automated testing.  
+> "Our implementation has been rigorously verified through comprehensive automated testing and is live in production for faculty review.  
 > In Python, our Pytest suite executes 47 unit and integration tests with a 100% pass rate in 20 seconds, verifying data reconciliation, lag integrity, and business logic boundaries.  
 > In the frontend, our Playwright end-to-end test suite executes 54 browser tests across 6 device viewports from 360px mobile to 1440px desktop with zero failures, confirming zero horizontal overflow, zero uncaught errors, and healthy API proxying.  
-> Security practices include strict Pydantic bounds validation, origin-whitelisted CORS, and explicit prototype disclosures."
+> Both the Next.js 16 frontend and the FastAPI backend are deployed publicly on Vercel and Render at fresh-track-intelligence.vercel.app, enabling direct interactive faculty evaluation."
 
 ---
 
