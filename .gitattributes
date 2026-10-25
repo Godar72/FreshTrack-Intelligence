@@ -2,3 +2,7 @@
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.docx filter=lfs diff=lfs merge=lfs -text
 *.pptx filter=lfs diff=lfs merge=lfs -text
+
+# Exclude frontend public static assets from Git LFS so Vercel serves actual image files directly
+frontend/public/** !filter !diff !merge
+frontend/src/** !filter !diff !merge
