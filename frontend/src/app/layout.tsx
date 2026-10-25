@@ -23,7 +23,14 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/brand/favicon.png", sizes: "64x64", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/brand/freshtrack-icon.png", sizes: "512x512", type: "image/png" },
+    ],
   },
 };
 

@@ -80,9 +80,11 @@ export default function LoginPage() {
       {/* Top Header */}
       <header className="h-16 w-full px-6 lg:px-12 border-b border-[#C3C8C3] bg-[#F6F4EB] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 bg-[#183D32] border border-[#416659] flex items-center justify-center text-[#A8BE78] font-bold text-xs tracking-wider">
-            FT
-          </div>
+          <img
+            src="/brand/freshtrack-icon.png"
+            alt="FreshTrack Icon"
+            className="w-7 h-7 object-contain shrink-0"
+          />
           <span className="font-label-lg text-xs uppercase tracking-wider text-[#13201A] font-bold">
             FreshTrack Intelligence
           </span>
@@ -110,20 +112,22 @@ export default function LoginPage() {
           {/* Left Column: Sign-in Form */}
           <div className="lg:col-span-7 flex flex-col justify-between bg-[#FFFFFF] p-6 sm:p-10 border border-[#C3C8C3]">
             <div>
-              {/* Header Badge */}
-              <div className="flex items-center justify-between gap-2 mb-6">
-                <span className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#F0EEE5] text-[#183D32] font-label-sm text-xs uppercase tracking-widest font-semibold border border-[#C3C8C3]">
-                  <span className="w-2 h-2 bg-[#183D32] inline-block"></span>
-                  <span>Store Operations Gateway</span>
-                </span>
-                <span className="font-label-sm text-[11px] text-[#737875] tracking-wider uppercase">
-                  Production v1.4
+              {/* Brand Logo & Gateway Status */}
+              <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-[#EAE8DF]">
+                <img
+                  src="/brand/freshtrack-logo.png"
+                  alt="FreshTrack Intelligence"
+                  className="h-9 sm:h-10 w-auto max-w-[220px] object-contain"
+                />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#F0EEE5] text-[#183D32] font-label-sm text-[11px] uppercase tracking-wider font-semibold border border-[#C3C8C3] shrink-0">
+                  <span className="w-1.5 h-1.5 bg-[#183D32] inline-block"></span>
+                  <span>Gateway v1.4</span>
                 </span>
               </div>
 
               <div className="space-y-1 mb-6">
                 <h1 className="font-headline-lg text-2xl lg:text-3xl text-[#13201A] font-bold tracking-tight">
-                  Sign In to FreshTrack
+                  Sign In to Operations
                 </h1>
                 <p className="font-body-md text-sm text-[#434845]">
                   AI-powered perishable inventory forecasting &amp; margin-safeguarded dynamic markdowns.

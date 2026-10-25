@@ -94,22 +94,22 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
           className="hidden lg:flex fixed left-0 top-0 h-full w-[260px] bg-[#13201A] text-[#FAF9F5] z-50 flex-col justify-between border-r border-[#28352F]"
         >
           <div className="flex flex-col">
-            {/* Monogram Brand Header */}
-            <div className="px-4 pt-6 pb-4 border-b border-[#28352F]">
+            {/* Brand Header */}
+            <div className="px-5 pt-6 pb-5 border-b border-[#28352F]">
               <Link
                 href="/overview"
-                className="flex items-center gap-3 group focus:outline-none focus:ring-1 focus:ring-[#A8BE78]"
+                className="flex flex-col gap-2 group focus:outline-none focus:ring-1 focus:ring-[#A8BE78]"
               >
-                <div className="w-8 h-8 bg-[#183D32] border border-[#416659] flex items-center justify-center text-[#A8BE78] font-bold text-sm tracking-wider">
-                  FT
+                <div className="flex items-center">
+                  <img
+                    src="/brand/freshtrack-logo-dark.png"
+                    alt="FreshTrack Intelligence"
+                    className="h-9 w-auto max-w-[210px] object-contain"
+                  />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-headline-sm text-lg font-bold tracking-tight text-[#FAF9F5] leading-tight group-hover:text-[#A8BE78] transition-colors">
-                    FreshTrack
-                  </span>
-                  <span className="font-label-sm text-[10px] uppercase tracking-wider text-[#BBCAC1]">
-                    Retail Operations · v1.4
-                  </span>
+                <div className="flex items-center justify-between text-[#8F9E96] font-label-sm text-[9px] uppercase tracking-widest pl-0.5">
+                  <span>Retail Operations</span>
+                  <span className="text-[#A8BE78] font-semibold">v1.4</span>
                 </div>
               </Link>
             </div>
@@ -213,10 +213,17 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
                 <Menu className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center gap-2">
-                <span className="font-label-lg text-xs font-bold text-[#13201A] uppercase tracking-wider">
-                  FreshTrack
-                </span>
+              <div className="flex items-center gap-2.5">
+                <Link href="/overview" className="flex items-center gap-2 focus:outline-none">
+                  <img
+                    src="/brand/freshtrack-icon.png"
+                    alt="FreshTrack"
+                    className="w-6 h-6 object-contain shrink-0"
+                  />
+                  <span className="font-label-lg text-xs font-bold text-[#13201A] uppercase tracking-wider">
+                    FreshTrack
+                  </span>
+                </Link>
                 <span className="text-[#737875] text-xs">/</span>
                 <span className="font-label-md text-xs text-[#434845] uppercase tracking-wider hidden sm:inline-block">
                   Perishable Operations
@@ -283,13 +290,20 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
               <div className="flex flex-col">
                 {/* Drawer Header */}
                 <div className="h-16 px-4 border-b border-[#C3C8C3] flex items-center justify-between bg-[#F6F4EB]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 bg-[#183D32] text-[#A8BE78] flex items-center justify-center font-bold text-xs">
-                      FT
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src="/brand/freshtrack-icon.png"
+                      alt="FreshTrack Icon"
+                      className="w-7 h-7 object-contain shrink-0"
+                    />
+                    <div className="flex flex-col">
+                      <span className="font-label-lg text-xs tracking-wider text-[#13201A] uppercase font-bold">
+                        FreshTrack
+                      </span>
+                      <span className="text-[10px] text-[#737875] uppercase tracking-wider">
+                        Retail Operations
+                      </span>
                     </div>
-                    <span className="font-label-lg text-xs tracking-wider text-[#13201A] uppercase font-bold">
-                      FreshTrack Menu
-                    </span>
                   </div>
                   <button
                     type="button"
