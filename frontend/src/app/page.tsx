@@ -120,7 +120,7 @@ export default function OverviewDashboardPage() {
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <span className="inline-block w-2 h-2 bg-[#416659]"></span>
               <span className="font-label-sm text-[11px] uppercase tracking-widest text-[#434845]">
-                Store 1 (Quito) · Academic Research Benchmark
+                Store 1 · Quito · Retail Inventory Operations
               </span>
               <span className="text-[#C3C8C3]">/</span>
               <span className="font-label-sm text-[11px] uppercase text-[#416659] font-semibold">
@@ -173,7 +173,7 @@ export default function OverviewDashboardPage() {
 
             <div className="hidden 2xl:flex items-center gap-2 bg-[#F0EEE5] border border-[#C3C8C3] px-3 py-2 text-[#434845] font-label-sm text-[11px]">
               <span className="w-1.5 h-1.5 bg-[#A8BE78]"></span>
-              <span>Simulation Prototype · Kaggle Dataset</span>
+              <span>Historical Point-of-Sale Data</span>
             </div>
           </div>
         </div>
@@ -201,7 +201,7 @@ export default function OverviewDashboardPage() {
           {/* Tile 2 */}
           <div className="p-6 border-b md:border-b-0 lg:border-r border-[#C3C8C3] flex flex-col justify-between">
             <div className="flex items-center justify-between text-[#434845] mb-2">
-              <span className="font-label-sm text-xs uppercase tracking-wider">Illustrative Simulated Surplus</span>
+              <span className="font-label-sm text-xs uppercase tracking-wider">Estimated Surplus</span>
               <AlertTriangle className="w-4 h-4 text-[#BA1A1A]" />
             </div>
             <div className="flex items-baseline gap-2 my-2">
@@ -211,7 +211,7 @@ export default function OverviewDashboardPage() {
               <span className="font-label-sm text-xs text-[#434845] uppercase">units</span>
             </div>
             <div className="font-body-sm text-xs text-[#434845]">
-              <strong className="font-semibold text-[#1B1C17] font-label-sm">Simulation Demonstration</strong> — Not Measured Store Data
+              <strong className="font-semibold text-[#1B1C17] font-label-sm">Configured Estimate</strong> — Based on User-Defined Inputs
             </div>
           </div>
 
@@ -239,7 +239,7 @@ export default function OverviewDashboardPage() {
           {/* Tile 4 */}
           <div className="p-6 flex flex-col justify-between bg-[#F6F4EB]/60">
             <div className="flex items-center justify-between text-[#434845] mb-2">
-              <span className="font-label-sm text-xs uppercase tracking-wider">Champion Model Benchmark</span>
+              <span className="font-label-sm text-xs uppercase tracking-wider">Forecast Model Performance</span>
               <Percent className="w-4 h-4 text-[#416659]" />
             </div>
             <div className="flex flex-col my-1">
@@ -299,7 +299,7 @@ export default function OverviewDashboardPage() {
                   {activePoint?.date || "Jul 20, 2017 · Day +4"}
                 </span>
                 <span className="px-1.5 py-0.5 bg-[#BA1A1A] text-[#FAF9F5] font-label-sm text-[9px] uppercase font-bold">
-                  Illustrative Case
+                  Forecast Scenario
                 </span>
               </div>
               <div className="space-y-1 font-body-sm text-xs">
@@ -317,7 +317,7 @@ export default function OverviewDashboardPage() {
                 </div>
               </div>
               <div className="mt-2 pt-1.5 border-t border-[#C3C8C3] text-[10px] text-[#737875] font-body-sm italic">
-                Simulation markdown safeguard: 50% Critical tier at T-48h. Not measured store data.
+                Dynamic markdown safeguard: 50% Critical tier at T-48h. Configured scenario simulation.
               </div>
             </div>
 
@@ -437,10 +437,10 @@ export default function OverviewDashboardPage() {
           <div className="px-4 py-3 border-t border-[#C3C8C3] bg-[#F0EEE5] flex flex-col sm:flex-row items-start sm:items-center justify-between text-[#434845] font-body-sm text-xs gap-2">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#183D32]" />
-              <span>Simulation / Academic Prototype — No live telemetry or unverified confidence bands.</span>
+              <span>Inventory and markdown recommendations are estimates based on configured stock inputs and forecast demand.</span>
             </div>
             <span className="font-label-sm text-xs uppercase tracking-wider text-[#737875]">
-              Validation Benchmark: Store 1 (Quito, Ecuador)
+              Operational Scope: Store 1 · Quito
             </span>
           </div>
         </div>
@@ -531,7 +531,7 @@ export default function OverviewDashboardPage() {
                   <th className="py-3 px-4 font-semibold">Product Family</th>
                   <th className="py-3 px-4 font-semibold text-right">Configured Simulation Stock</th>
                   <th className="py-3 px-4 font-semibold text-right">Horizon Forecast</th>
-                  <th className="py-3 px-4 font-semibold text-right">Illustrative Surplus</th>
+                  <th className="py-3 px-4 font-semibold text-right">Estimated Surplus</th>
                   <th className="py-3 px-4 font-semibold text-center">Risk Classification</th>
                   <th className="py-3 px-4 font-semibold text-right">Rule-Based Recommendation</th>
                   <th className="py-3 px-4 font-semibold text-center">Action</th>
@@ -641,7 +641,7 @@ export default function OverviewDashboardPage() {
 
           <div className="p-4 border-t border-[#C3C8C3] bg-[#F6F4EB] flex flex-col sm:flex-row items-center justify-between gap-2">
             <span className="font-body-sm text-xs text-[#434845]">
-              Academic validation simulation for Store 1 (Quito, Pichincha, Ecuador) · Kaggle Store Sales benchmark.
+              Perishable inventory forecasting &amp; dynamic markdown safeguard platform for Store 1 · Quito.
             </span>
             <div className="flex items-center gap-4 font-label-sm text-xs text-[#434845] uppercase">
               <span>Row count: {filteredFamilies.length} of 9 perishable families displayed</span>

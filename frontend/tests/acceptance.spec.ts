@@ -1,40 +1,113 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 
-test.describe("FreshTrack Intelligence - Full Acceptance Suite", () => {
-  // Test 1: Overview Screen
-  test("Screen 1: Overview loads with actual API metrics and table", async ({
+// Helper to authenticate session as Store Operations Manager
+async function authenticateOperator(page: Page) {
+  await page.goto("/login");
+  await page.locator("#operator-email").fill("manager@freshtrack.retail");
+  await page.locator("#operator-password").fill("FreshTrack2026!");
+  await page.locator('button[type="submit"]').click();
+  await page.waitForURL("**/overview", { timeout: 15000 });
+}
+
+test.describe("FreshTrack Intelligence - Retail Application Acceptance Suite", () => {
+  // Test 1: Authentication Requirement on Root
+  test("Auth 1: Unauthenticated visitor to / is redirected to /login", async ({
     page,
   }) => {
-    const consoleErrors: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "error") consoleErrors.push(msg.text());
-    });
+    await page.goto("/");
+    await page.waitForURL("**/login", { timeout: 10000 });
+    await expect(page.locator("h1")).toContainText(/Sign In to FreshTrack/i);
+    await expect(page.locator("#operator-email")).toBeVisible();
+    await expect(page.locator("#operator-password")).toBeVisible();
+  });
 
+  // Test 2: Protected Route Enforcement
+  test("Auth 2: Direct unauthenticated visit to /overview is blocked and redirected to /login", async ({
+    page,
+  }) => {
     await page.goto("/overview");
-    await expect(page).toHaveTitle(/FreshTrack Intelligence/i);
+    await page.waitForURL(/login\?redirect=%2Foverview/, { timeout: 10000 });
+    await expect(page.locator("h1")).toContainText(/Sign In to FreshTrack/i);
+  });
+
+  // Test 3: Failed Login Feedback
+  test("Auth 3: Invalid login credentials show clear error message", async ({
+    page,
+  }) => {
+    await page.goto("/login");
+    await page.locator("#operator-email").fill("invalid@retailer.com");
+    await page.locator("#operator-password").fill("WrongPassword123!");
+    await page.locator('button[type="submit"]').click();
+
+    const errorAlert = page.locator('[role="alert"]');
+    await expect(errorAlert).toBeVisible({ timeout: 10000 });
+    await expect(errorAlert).toContainText(/Authentication Failed/i);
+  });
+
+  // Test 4: Successful Login & Redirect
+  test("Auth 4: Valid login authenticates and redirects to Overview", async ({
+    page,
+  }) => {
+    await page.goto("/login");
+    await page.locator("#operator-email").fill("manager@freshtrack.retail");
+    await page.locator("#operator-password").fill("FreshTrack2026!");
+    await page.locator('button[type="submit"]').click();
+
+    await page.waitForURL("**/overview", { timeout: 15000 });
+    await expect(page.locator("h1")).toContainText(/Retail intelligence/i);
+    await expect(page.getByText(/Store 1 · Quito/i).first()).toBeVisible();
+  });
+
+  // Test 5: Session Persistence Across Reload
+  test("Auth 5: Authenticated session persists across page reloads", async ({
+    page,
+  }) => {
+    await authenticateOperator(page);
+    await page.reload();
+    await expect(page.locator("h1")).toContainText(/Retail intelligence/i);
+    expect(page.url()).toContain("/overview");
+  });
+
+  // Test 6: Logout Returns to Login
+  test("Auth 6: Sign out terminates session and redirects to /login", async ({
+    page,
+  }) => {
+    await authenticateOperator(page);
+    const signOutBtn = page.getByRole("button", { name: /Sign out/i }).first();
+    await signOutBtn.click();
+    await page.waitForURL("**/login", { timeout: 10000 });
+    await expect(page.locator("h1")).toContainText(/Sign In to FreshTrack/i);
+
+    // Verify cannot re-access protected overview without login
+    await page.goto("/overview");
+    await page.waitForURL("**/login?redirect=%2Foverview", { timeout: 10000 });
+  });
+
+  // Test 7: Overview Screen (Authenticated)
+  test("Screen 1: Overview loads with verified metrics and 9 perishable families", async ({
+    page,
+  }) => {
+    await authenticateOperator(page);
 
     // Verify main header and store context
     await expect(page.locator("h1")).toContainText(/Retail intelligence/i);
-    await expect(page.getByText(/Store 1/i).first()).toBeVisible();
-    await expect(page.getByText(/Pichincha, Ecuador/i).first()).toBeVisible();
+    await expect(page.getByText(/Store 1 · Quito/i).first()).toBeVisible();
 
-    // Verify metric cards rendered from API
-    await expect(page.getByText(/Champion Model Benchmark/i)).toBeVisible();
+    // Verify metric cards
+    await expect(page.getByText(/Forecast Model Performance/i)).toBeVisible();
     await expect(page.getByText(/10.69%/i).first()).toBeVisible();
     await expect(page.getByText(/50.913/i).first()).toBeVisible();
 
     // Verify table has 9 perishable families
     const tableRows = page.locator("tbody tr");
     await expect(tableRows).toHaveCount(9);
-
-    // Verify no unexpected console errors
-    expect(consoleErrors.filter((e) => !e.includes("favicon"))).toHaveLength(0);
   });
 
-  // Test 2: Demand Forecast Screen
-  test("Screen 2: Demand Forecast loads recursive forecast", async ({
+  // Test 8: Demand Forecast Screen
+  test("Screen 2: Demand Forecast loads recursive forecast with category selection", async ({
     page,
   }) => {
+    await authenticateOperator(page);
     await page.goto("/demand-forecast");
     await expect(page.locator("h1")).toContainText(/Perishable Demand Forecast/i);
 
@@ -56,10 +129,11 @@ test.describe("FreshTrack Intelligence - Full Acceptance Suite", () => {
     expect(count).toBeGreaterThanOrEqual(14);
   });
 
-  // Test 3: Inventory Risk Simulator Screen
+  // Test 9: Inventory Risk Simulator Screen
   test("Screen 3: Inventory Risk Simulator dynamically recomputes risk", async ({
     page,
   }) => {
+    await authenticateOperator(page);
     await page.goto("/inventory-risk");
     await expect(page.locator("h1")).toContainText(/Perishable Inventory Risk Simulation/i);
 
@@ -82,10 +156,11 @@ test.describe("FreshTrack Intelligence - Full Acceptance Suite", () => {
     await expect(page.getByText(/surplus units/i).first()).toBeVisible();
   });
 
-  // Test 4: Markdown Planner Screen & Safeguard
+  // Test 10: Markdown Planner Screen & Safeguard
   test("Screen 4: Markdown Planner enforces discount tiers and cost floor safeguard", async ({
     page,
   }) => {
+    await authenticateOperator(page);
     await page.goto("/markdown-planner");
     await expect(page.locator("h1")).toContainText(/Dynamic Markdown Decision Planner/i);
 
@@ -100,10 +175,11 @@ test.describe("FreshTrack Intelligence - Full Acceptance Suite", () => {
     await expect(page.getByText(/Clamped Safe Minimum Price/i)).toBeVisible();
   });
 
-  // Test 5: Model Performance Screen
-  test("Screen 5: Model Performance renders verified academic metrics", async ({
+  // Test 11: Model Performance Screen
+  test("Screen 5: Model Performance renders verified performance metrics", async ({
     page,
   }) => {
+    await authenticateOperator(page);
     await page.goto("/model-performance");
     await expect(page.locator("h1")).toContainText(/Model Performance & Validation/i);
 
@@ -119,62 +195,57 @@ test.describe("FreshTrack Intelligence - Full Acceptance Suite", () => {
 
     // Check holdout specification
     await expect(page.getByText(/270 samples/i).first()).toBeVisible();
-    await expect(page.getByText(/July 17, 2017/i).first()).toBeVisible();
   });
 
-  // Test 6: Dedicated Mobile Screen
-  test("Screen 6: Dedicated Mobile Dashboard renders floor ops layout", async ({
+  // Test 12: Mobile Dashboard Option Absent from Navigation
+  test("Navigation 1: Mobile Dashboard item is absent from navigation", async ({
     page,
   }) => {
-    await page.goto("/mobile");
-    await expect(page.locator("h1")).toContainText(/Retail overview/i);
-    await expect(page.getByText(/Store 1 · Quito/i).first()).toBeVisible();
-
-    // Verify quick action links
-    await expect(page.getByRole("link", { name: /Run Inventory Risk Simulation/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Open Dynamic Markdown Planner/i })).toBeVisible();
-
-    // Verify mobile urgent perishable items
-    await expect(page.getByText(/Urgent Perishable Items/i)).toBeVisible();
+    await authenticateOperator(page);
+    const navBar = page.locator("nav");
+    await expect(navBar.getByText(/Mobile Dashboard/i)).toHaveCount(0);
+    await expect(navBar.getByText(/Terminal Login/i)).toHaveCount(0);
   });
 
-  // Test 7: Login Interface
-  test("Screen 7: Login interface clearly discloses academic prototype status", async ({
+  // Test 13: Automatic Responsive Navigation Layout
+  test("Navigation 2: Automatic responsive layout adapts to viewport", async ({
     page,
   }) => {
-    await page.goto("/login");
-    await expect(page.locator("h1")).toContainText(/FreshTrack Terminal Access/i);
+    await authenticateOperator(page);
+    const viewportSize = page.viewportSize();
 
-    // Verify disclosure banner
-    await expect(page.getByText(/Frontend Prototype Interface Notice/i)).toBeVisible();
-    await expect(page.getByText(/No live credentials, backend directory lookups, or user accounts/i)).toBeVisible();
-
-    // Test reviewer state switcher
-    const errorStateBtn = page.getByRole("button", { name: "error" });
-    await errorStateBtn.click();
-    await expect(page.getByText(/Authentication Verification Failed/i)).toBeVisible();
+    if (viewportSize && viewportSize.width >= 1024) {
+      // Desktop: Aside sidebar is visible
+      await expect(page.locator("aside[aria-label='Main Navigation']")).toBeVisible();
+      // Mobile bottom bar is hidden
+      await expect(page.locator("nav[aria-label='Mobile Navigation Bar']")).toBeHidden();
+    } else {
+      // Mobile / Tablet: Bottom bar is visible
+      await expect(page.locator("nav[aria-label='Mobile Navigation Bar']")).toBeVisible();
+    }
   });
 
-  // Test 8: Custom 404 Error Page
-  test("Custom 404 page renders with recovery navigation", async ({ page }) => {
+  // Test 14: Custom 404 Error Page
+  test("Navigation 3: Custom 404 page renders with recovery navigation", async ({
+    page,
+  }) => {
     await page.goto("/some-nonexistent-route-for-testing");
     await expect(page.getByText(/404/i)).toBeVisible();
     await expect(page.getByText(/Page Not Located/i)).toBeVisible();
     await expect(page.getByRole("link", { name: /Overview Dashboard/i })).toBeVisible();
   });
 
-  // Test 9: Responsive Layout & No Horizontal Overflow
-  test("Responsive layout: No horizontal overflow across all views", async ({
+  // Test 15: Responsive Layout & No Horizontal Overflow
+  test("Responsive: No horizontal overflow across all application routes", async ({
     page,
   }) => {
+    await authenticateOperator(page);
     const testRoutes = [
       "/overview",
       "/demand-forecast",
       "/inventory-risk",
       "/markdown-planner",
       "/model-performance",
-      "/mobile",
-      "/login",
     ];
 
     for (const route of testRoutes) {

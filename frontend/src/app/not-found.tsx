@@ -22,7 +22,7 @@ export default function NotFound() {
 
         <div className="flex flex-col sm:flex-row gap-3 w-full">
           <Link
-            href="/"
+            href="/overview"
             className="flex-1 bg-[#13201A] hover:bg-[#28352F] text-[#FAF9F5] py-2.5 px-4 font-label-md text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
           >
             <LayoutGrid className="w-4 h-4 text-[#A8BE78]" />

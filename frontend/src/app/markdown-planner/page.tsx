@@ -193,17 +193,17 @@ export default function MarkdownDecisionPlannerPage() {
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
                     <span className="font-label-sm text-xs uppercase tracking-wider text-[#737875] font-semibold">
-                      Simulation Benchmark SKU
+                      Perishable SKU Profile
                     </span>
                     <span className="bg-[#F0EEE5] px-2 py-0.5 text-xs text-[#737875] font-semibold uppercase">
                       Store 1 · Quito
                     </span>
                   </div>
                   <h2 className="font-headline-md text-xl text-[#13201A] font-bold mt-1">
-                    Fresh Produce Basket: Organic Strawberries (Demonstration Item)
+                    Fresh Produce Basket: Organic Strawberries 1kg
                   </h2>
                   <span className="font-body-sm text-xs text-[#434845] mt-0.5">
-                    Family: {productFamily} · Configured Baseline Case Study · Perishable Simulation
+                    Family: {productFamily} · Configured SKU Scenario · Perishable Inventory Operations
                   </span>
                 </div>
 
@@ -542,10 +542,10 @@ export default function MarkdownDecisionPlannerPage() {
               </div>
             </div>
 
-            {/* Viva Defense Knowledge Brief */}
+            {/* Operational Governance Knowledge Brief */}
             <div className="bg-[#F0EEE5] border-l-4 border-[#183D32] p-5 flex flex-col gap-2">
               <span className="font-label-sm text-xs uppercase tracking-widest text-[#183D32] font-bold">
-                Viva Defense Rationale: Why Rule-Based Floors?
+                Operational Governance: Why Rule-Based Margin Floors?
               </span>
               <p className="font-body-md text-xs text-[#1B1C17] leading-relaxed">
                 In real-world retail food waste mitigation, aggressive unconstrained discounting can cannibalize

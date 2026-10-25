@@ -107,7 +107,7 @@ export default function ModelPerformanceValidationPage() {
               <Info className="w-5 h-5 text-[#737875] shrink-0 mt-0.5" />
               <div className="flex flex-col gap-1">
                 <span className="font-label-sm text-xs uppercase tracking-wider text-[#13201A] font-bold">
-                  Academic Disclaimer &amp; Single-Store Holdout Scope
+                  Model Validation &amp; Single-Store Scope
                 </span>
                 <p className="font-body-md text-xs text-[#1B1C17] leading-relaxed">
                   <strong className="font-semibold text-[#13201A]">Scope of Validation:</strong> Initial
@@ -452,7 +452,7 @@ export default function ModelPerformanceValidationPage() {
         <div className="max-w-7xl mx-auto flex flex-col gap-6">
           <div className="flex flex-col gap-1 border-b border-[#183D32] pb-3">
             <span className="font-label-sm text-xs uppercase tracking-wider text-[#183D32] font-bold">
-              Academic Governance &amp; Protocol Integrity
+              Model Governance &amp; Protocol Integrity
             </span>
             <h2 className="font-headline-md text-2xl font-bold text-[#13201A]">
               Methodology, Validation Rigor &amp; Operational Boundaries

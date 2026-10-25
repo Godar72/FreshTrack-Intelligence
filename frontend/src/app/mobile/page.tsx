@@ -68,7 +68,7 @@ export default function DedicatedMobileDashboardPage() {
               FreshTrack
             </span>
             <span className="font-label-sm text-[9px] text-[#434845] uppercase">
-              Store 1 · Quito (Pilot)
+              Store 1 · Quito
             </span>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function DedicatedMobileDashboardPage() {
                   type="button"
                   onClick={() => setDrawerOpen(false)}
                   aria-label="Close menu"
-                  className="p-2 text-[#434845] hover:text-[#13201A]"
+                  className="p-1 text-[#434845] hover:text-[#13201A]"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -110,12 +110,12 @@ export default function DedicatedMobileDashboardPage() {
 
               <nav className="flex flex-col px-2 py-3" aria-label="Mobile menu navigation">
                 <Link
-                  href="/"
+                  href="/overview"
                   onClick={() => setDrawerOpen(false)}
                   className="h-11 flex items-center gap-3 px-3 text-xs uppercase tracking-wider text-[#434845] hover:bg-[#EAE8DF]"
                 >
                   <LayoutGrid className="w-4 h-4 text-[#183D32]" />
-                  <span>Desktop Overview</span>
+                  <span>Overview Dashboard</span>
                 </Link>
                 <Link
                   href="/demand-forecast"

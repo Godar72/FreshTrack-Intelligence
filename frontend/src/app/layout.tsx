@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "HistGradientBoosting",
     "retail operations",
   ],
-  authors: [{ name: "FreshTrack Academic Research Group" }],
+  authors: [{ name: "FreshTrack Operations" }],
   openGraph: {
     title: "FreshTrack Intelligence Platform",
     description:
