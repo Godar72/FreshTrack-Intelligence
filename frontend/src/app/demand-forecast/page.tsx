@@ -26,6 +26,13 @@ const PERISHABLE_FAMILIES = [
   "PREPARED FOODS",
 ];
 
+interface HistoricalItem {
+  date: string;
+  sales: number;
+  onpromotion: number;
+  day_of_week: number;
+}
+
 interface DailyForecastItem {
   step: number;
   date: string;
@@ -51,29 +58,42 @@ export default function DemandForecastPage() {
   const [horizonDays, setHorizonDays] = useState(14);
   const [originDate, setOriginDate] = useState("2017-07-16");
   const [forecastData, setForecastData] = useState<ForecastResponse | null>(null);
+  const [historicalData, setHistoricalData] = useState<HistoricalItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [computing, setComputing] = useState(false);
   const [hoveredPoint, setHoveredPoint] = useState<{
     date: string;
-    step: number;
+    type: "Observed Historical Sales" | "Recursive Forecast";
+    step?: number;
     units: number;
   } | null>(null);
 
   const fetchForecast = async (family: string, horizon: number, date: string) => {
     try {
       setComputing(true);
-      const res = await fetch("/api/forecast", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          product_family: family,
-          forecast_origin_date: date,
-          horizon_days: horizon,
+      const [fcRes, histRes] = await Promise.all([
+        fetch("/api/forecast", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            product_family: family,
+            forecast_origin_date: date,
+            horizon_days: horizon,
+          }),
         }),
-      });
-      if (!res.ok) throw new Error("Failed to fetch forecast");
-      const json: ForecastResponse = await res.json();
+        fetch(
+          `/api/historical-sales?family=${encodeURIComponent(family)}&days=30&end_date=${encodeURIComponent(date)}`
+        ),
+      ]);
+
+      if (!fcRes.ok) throw new Error("Failed to fetch forecast");
+      const json: ForecastResponse = await fcRes.json();
       setForecastData(json);
+
+      if (histRes.ok) {
+        const histJson = await histRes.json();
+        setHistoricalData(histJson.series || []);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -107,6 +127,125 @@ export default function DemandForecastPage() {
   const cumulativeDemand = forecastData?.cumulative_demand ?? 16420;
   const peakDay = forecastData?.peak_day;
   const dailyAverage = forecastData?.daily_average_demand ?? 1172.8;
+
+  // Chart Geometry & Dynamic Scaling
+  const HIST_START_X = 40;
+  const ORIGIN_X = 660;
+  const FORECAST_END_X = 980;
+  const Y_TOP = 60;
+  const Y_BASE = 300;
+  const PLOT_HEIGHT = Y_BASE - Y_TOP; // 240
+
+  const allValues = [
+    ...historicalData.map((d) => d.sales),
+    ...(forecastData?.daily_forecasts.map((d) => d.predicted_demand) || []),
+  ];
+  const maxObserved = allValues.length > 0 ? Math.max(...allValues) : 2400;
+
+  // Dynamic nice Y ceiling and 5-step grid tick levels
+  const getYScale = (maxVal: number) => {
+    const target = Math.max(maxVal * 1.15, 100);
+    const exp = Math.floor(Math.log10(target));
+    const base = Math.pow(10, exp);
+    const frac = target / base;
+    let mult = 10;
+    if (frac <= 1.2) mult = 1.2;
+    else if (frac <= 1.5) mult = 1.5;
+    else if (frac <= 2.0) mult = 2.0;
+    else if (frac <= 2.5) mult = 2.5;
+    else if (frac <= 3.0) mult = 3.0;
+    else if (frac <= 4.0) mult = 4.0;
+    else if (frac <= 5.0) mult = 5.0;
+    else if (frac <= 6.0) mult = 6.0;
+    else if (frac <= 8.0) mult = 8.0;
+
+    const ceiling = Math.round(mult * base);
+    return {
+      ceiling,
+      ticks: [
+        { y: Y_TOP, val: ceiling },
+        { y: Y_TOP + PLOT_HEIGHT * 0.25, val: Math.round(ceiling * 0.75) },
+        { y: Y_TOP + PLOT_HEIGHT * 0.5, val: Math.round(ceiling * 0.5) },
+        { y: Y_TOP + PLOT_HEIGHT * 0.75, val: Math.round(ceiling * 0.25) },
+        { y: Y_BASE, val: 0 },
+      ],
+    };
+  };
+
+  const { ceiling: yCeiling, ticks: yGridTicks } = getYScale(maxObserved);
+
+  const getYCoord = (val: number) => {
+    const ratio = Math.min(Math.max(val / yCeiling, 0), 1);
+    return Y_BASE - ratio * PLOT_HEIGHT;
+  };
+
+  // 1. Observed Historical Data Points & Path
+  const histPoints = historicalData.map((d, i) => {
+    const x =
+      historicalData.length > 1
+        ? HIST_START_X + (i * (ORIGIN_X - HIST_START_X)) / (historicalData.length - 1)
+        : ORIGIN_X;
+    const y = getYCoord(d.sales);
+    return { x, y, date: d.date, sales: d.sales };
+  });
+
+  const histLinePath =
+    histPoints.length > 0
+      ? histPoints
+          .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+          .join(" ")
+      : "";
+
+  const histAreaPath =
+    histPoints.length > 0
+      ? `${histLinePath} L ${ORIGIN_X} ${Y_BASE} L ${HIST_START_X} ${Y_BASE} Z`
+      : "";
+
+  // 2. Recursive Forecast Points & Continuous Path
+  const forecasts = forecastData?.daily_forecasts || [];
+  const lastHist = histPoints[histPoints.length - 1];
+  const fcStartX = ORIGIN_X;
+  const fcStartY = lastHist ? lastHist.y : getYCoord(forecasts[0]?.predicted_demand || 0);
+
+  const fcPoints = forecasts.map((f, i) => {
+    const x =
+      forecasts.length > 0
+        ? ORIGIN_X + ((i + 1) * (FORECAST_END_X - ORIGIN_X)) / forecasts.length
+        : ORIGIN_X;
+    const y = getYCoord(f.predicted_demand);
+    return { ...f, x, y };
+  });
+
+  const fcLinePath =
+    fcPoints.length > 0
+      ? `M ${fcStartX.toFixed(1)} ${fcStartY.toFixed(1)} ` +
+        fcPoints.map((p) => `L ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ")
+      : "";
+
+  // 3. Dynamic Peak Identifier
+  const peakPoint =
+    fcPoints.find((p) => p.step === peakDay?.step) ||
+    (fcPoints.length > 0
+      ? fcPoints.reduce((best, cur) => (cur.predicted_demand > best.predicted_demand ? cur : best), fcPoints[0])
+      : null);
+
+  // 4. Dynamic X-Axis Date Intervals
+  const histDateTicks: Array<{ x: number; label: string }> = [];
+  if (histPoints.length >= 4) {
+    const step = Math.floor(histPoints.length / 4);
+    for (let i = 0; i < histPoints.length - 1; i += step) {
+      if (histDateTicks.length < 4) {
+        histDateTicks.push({
+          x: histPoints[i].x,
+          label: histPoints[i].date.slice(5),
+        });
+      }
+    }
+  }
+
+  const forecastStartDate = forecastData?.daily_forecasts[0]?.date || "Jul 17";
+  const forecastEndDate =
+    forecastData?.daily_forecasts[forecastData?.daily_forecasts.length - 1]?.date || "Jul 30";
 
   return (
     <div className="flex flex-col w-full bg-[#FBF9F0]">
@@ -225,7 +364,7 @@ export default function DemandForecastPage() {
             <div className="flex items-center bg-[#FFFFFF] border border-[#C3C8C3] px-3 py-2">
               <History className="w-4 h-4 text-[#737875] mr-2" />
               <span className="font-label-md text-xs text-[#1B1C17] truncate">
-                2016-01-15 – 2017-07-16
+                {historicalData[0]?.date || "2016-01-15"} – {originDate}
               </span>
             </div>
           </div>
@@ -249,13 +388,14 @@ export default function DemandForecastPage() {
               <div className="hidden xl:block h-6 w-px bg-[#C3C8C3]"></div>
               <div className="flex items-center gap-4 text-xs">
                 <div className="flex items-center gap-2">
-                  <span className="w-3.5 h-1 bg-[#183D32] inline-block"></span>
+                  <span className="w-3.5 h-1 bg-[#13201A] inline-block"></span>
                   <span className="font-label-sm uppercase text-[#1B1C17] font-medium">
                     Observed Historical Sales (Store 1)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-3.5 h-1 border-t-2 border-dashed border-[#416659] inline-block"></span>
+                  <span className="inline-block w-2.5 h-2.5 rounded-full border-2 border-[#416659] bg-[#FFFFFF]"></span>
                   <span className="font-label-sm uppercase text-[#1B1C17] font-medium">
                     Recursive Multi-Step Demand Forecast
                   </span>
@@ -265,7 +405,7 @@ export default function DemandForecastPage() {
 
             <div className="flex items-center gap-2 text-[#737875] font-label-sm text-xs uppercase">
               <span className="inline-block w-2 h-2 rounded-full bg-[#416659]"></span>
-              <span>Validation Window: 270 Samples</span>
+              <span>Model Benchmark: 270 Holdout Samples</span>
             </div>
           </div>
 
@@ -273,17 +413,23 @@ export default function DemandForecastPage() {
           <div className="relative w-full p-4 lg:p-6 overflow-x-auto select-none bg-[#FFFFFF]">
             {/* Live Hover Tooltip */}
             {hoveredPoint && (
-              <div className="absolute pointer-events-none z-30 border border-[#13201A] bg-[#13201A] text-[#FAF9F5] p-3 shadow-none min-w-[200px] top-4 right-8">
-                <div className="flex items-center justify-between border-b border-[#28352F] pb-1 mb-1.5">
+              <div className="absolute pointer-events-none z-30 border border-[#13201A] bg-[#13201A] text-[#FAF9F5] p-3 shadow-none min-w-[210px] top-4 right-8">
+                <div className="flex items-center justify-between border-b border-[#28352F] pb-1 mb-1.5 gap-2">
                   <span className="font-label-sm text-xs uppercase text-[#D7E6DD]">
                     {hoveredPoint.date}
                   </span>
                   <span className="font-label-sm text-[10px] uppercase bg-[#416659] px-1 text-[#FAF9F5]">
-                    Recursive t+{hoveredPoint.step}
+                    {hoveredPoint.type === "Recursive Forecast"
+                      ? `Recursive t+${hoveredPoint.step}`
+                      : "Observed Historical"}
                   </span>
                 </div>
                 <div className="flex justify-between items-baseline mb-0.5">
-                  <span className="font-body-sm text-xs text-[#BBCAC1]">Projected Demand:</span>
+                  <span className="font-body-sm text-xs text-[#BBCAC1]">
+                    {hoveredPoint.type === "Recursive Forecast"
+                      ? "Projected Demand:"
+                      : "Historical Sales:"}
+                  </span>
                   <span className="font-data-tabular-md text-sm font-bold text-[#FAF9F5]">
                     {hoveredPoint.units.toLocaleString()} units
                   </span>
@@ -305,74 +451,107 @@ export default function DemandForecastPage() {
 
                 <rect width="1000" height="300" fill="url(#gridSubtle)" opacity="0.8" />
 
-                {/* Grid Horizontals */}
-                <line x1="0" y1="60" x2="1000" y2="60" stroke="#E4E3DA" strokeWidth="1" />
-                <text x="6" y="55" className="fill-[#737875] font-label-sm text-[10px]">2,400 units</text>
-                <line x1="0" y1="120" x2="1000" y2="120" stroke="#E4E3DA" strokeWidth="1" />
-                <text x="6" y="115" className="fill-[#737875] font-label-sm text-[10px]">1,800 units</text>
-                <line x1="0" y1="180" x2="1000" y2="180" stroke="#E4E3DA" strokeWidth="1" />
-                <text x="6" y="175" className="fill-[#737875] font-label-sm text-[10px]">1,200 units</text>
-                <line x1="0" y1="240" x2="1000" y2="240" stroke="#E4E3DA" strokeWidth="1" />
-                <text x="6" y="235" className="fill-[#737875] font-label-sm text-[10px]">600 units</text>
-                <line x1="0" y1="300" x2="1000" y2="300" stroke="#C3C8C3" strokeWidth="1.25" />
-                <text x="6" y="295" className="fill-[#737875] font-label-sm text-[10px]">0 units</text>
+                {/* Grid Horizontals with Dynamic Y Values */}
+                {yGridTicks.map((t, idx) => (
+                  <g key={idx}>
+                    <line
+                      x1="0"
+                      y1={t.y}
+                      x2="1000"
+                      y2={t.y}
+                      stroke={idx === yGridTicks.length - 1 ? "#C3C8C3" : "#E4E3DA"}
+                      strokeWidth={idx === yGridTicks.length - 1 ? 1.25 : 1}
+                    />
+                    <text
+                      x="6"
+                      y={t.y - 5}
+                      className="fill-[#737875] font-label-sm text-[10px]"
+                    >
+                      {t.val.toLocaleString()} units
+                    </text>
+                  </g>
+                ))}
 
                 {/* Projection Shade */}
-                <rect x="660" y="0" width="340" height="300" fill="#F0EEE5" fillOpacity="0.45" />
-                <line x1="660" y1="0" x2="660" y2="300" stroke="#13201A" strokeWidth="2" strokeDasharray="4 2" />
+                <rect x={ORIGIN_X} y="0" width={1000 - ORIGIN_X} height="300" fill="#F0EEE5" fillOpacity="0.45" />
+                <line x1={ORIGIN_X} y1="0" x2={ORIGIN_X} y2="300" stroke="#13201A" strokeWidth="2" strokeDasharray="4 2" />
 
                 {/* Origin Badge */}
-                <g transform="translate(660, 20)">
+                <g transform={`translate(${ORIGIN_X}, 20)`}>
                   <rect x="-70" y="0" width="140" height="22" fill="#13201A" />
                   <text x="0" y="15" textAnchor="middle" fill="#FFFFFF" className="font-label-sm text-[10px] uppercase font-bold tracking-wider">
-                    Origin: Jul 17, 2017
+                    Origin: {originDate}
                   </text>
                 </g>
 
-                {/* Observed Historical Curve */}
-                <path
-                  d="M 40 220 L 85 205 L 135 125 L 185 195 L 235 200 L 285 120 L 335 170 L 385 195 L 435 125 L 485 165 L 535 195 L 585 110 L 635 160 L 660 195 L 660 300 L 40 300 Z"
-                  fill="url(#observedGrad)"
-                />
-                <path
-                  d="M 40 220 L 85 205 L 135 125 L 185 195 L 235 200 L 285 120 L 335 170 L 385 195 L 435 125 L 485 165 L 535 195 L 585 110 L 635 160 L 660 195"
-                  fill="none"
-                  stroke="#13201A"
-                  strokeWidth="2.5"
-                  strokeLinejoin="round"
-                />
+                {/* Dynamic Observed Historical Area and Line */}
+                {histAreaPath && (
+                  <path d={histAreaPath} fill="url(#observedGrad)" />
+                )}
+                {histLinePath && (
+                  <path
+                    d={histLinePath}
+                    fill="none"
+                    stroke="#13201A"
+                    strokeWidth="2.5"
+                    strokeLinejoin="round"
+                  />
+                )}
 
-                {/* Recursive Forecast Path */}
-                <path
-                  d="M 660 195 L 685 198 L 710 185 L 735 178 L 760 170 L 785 130 L 810 115 L 835 165 L 860 190 L 885 175 L 910 165 L 935 115 L 960 98 L 985 158"
-                  fill="none"
-                  stroke="#416659"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 3"
-                  strokeLinejoin="round"
-                />
+                {/* Historical Interactive Hover Nodes */}
+                {histPoints.map((h) => (
+                  <circle
+                    key={h.date}
+                    cx={h.x}
+                    cy={h.y}
+                    r={5}
+                    className="opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+                    fill="#13201A"
+                    onMouseEnter={() =>
+                      setHoveredPoint({
+                        date: h.date,
+                        type: "Observed Historical Sales",
+                        units: Math.round(h.sales),
+                      })
+                    }
+                    onMouseLeave={() => setHoveredPoint(null)}
+                  />
+                ))}
 
-                {/* Forecast Click/Hover Nodes */}
-                {forecastData?.daily_forecasts.slice(0, 14).map((f, idx) => {
-                  const cx = 685 + idx * 23;
-                  // Map predicted demand (0 - 2400) to y (300 - 60)
-                  const normalized = Math.min(Math.max(f.predicted_demand / 2400, 0), 1);
-                  const cy = 300 - normalized * 240;
+                {/* Dynamic Recursive Forecast Dashed Path */}
+                {fcLinePath && (
+                  <path
+                    d={fcLinePath}
+                    fill="none"
+                    stroke="#416659"
+                    strokeWidth="2.5"
+                    strokeDasharray="5 3"
+                    strokeLinejoin="round"
+                  />
+                )}
 
+                {/* Forecast Click/Hover Nodes (precisely on forecast line vertices) */}
+                {fcPoints.map((f) => {
+                  const isPeak = peakPoint?.step === f.step;
                   return (
                     <g
                       key={f.step}
                       className="cursor-pointer"
                       onMouseEnter={() =>
-                        setHoveredPoint({ date: f.date, step: f.step, units: Math.round(f.predicted_demand) })
+                        setHoveredPoint({
+                          date: f.date,
+                          type: "Recursive Forecast",
+                          step: f.step,
+                          units: Math.round(f.predicted_demand),
+                        })
                       }
                       onMouseLeave={() => setHoveredPoint(null)}
                     >
                       <circle
-                        cx={cx}
-                        cy={cy}
-                        r={idx === 5 ? 5.5 : 4}
-                        fill={idx === 5 ? "#13201A" : "#FFFFFF"}
+                        cx={f.x}
+                        cy={f.y}
+                        r={isPeak ? 5.5 : 4}
+                        fill={isPeak ? "#13201A" : "#FFFFFF"}
                         stroke="#416659"
                         strokeWidth="2"
                       />
@@ -380,23 +559,75 @@ export default function DemandForecastPage() {
                   );
                 })}
 
-                {/* Peak Callout Marker */}
-                <g transform="translate(810, 115)">
-                  <line x1="0" y1="0" x2="0" y2="-40" stroke="#13201A" strokeWidth="1" strokeDasharray="2 2" />
-                  <rect x="-65" y="-60" width="130" height="20" fill="#13201A" />
-                  <text x="0" y="-46" textAnchor="middle" fill="#FAF9F5" className="font-label-sm text-[10px] uppercase font-bold tracking-wider">
-                    Peak: Sat Jul 22
-                  </text>
-                </g>
+                {/* Peak Callout Marker (Dynamically positioned above true peak point) */}
+                {peakPoint && (
+                  <g
+                    transform={`translate(${peakPoint.x.toFixed(1)}, ${Math.max(
+                      peakPoint.y,
+                      75
+                    ).toFixed(1)})`}
+                  >
+                    <line
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="-32"
+                      stroke="#13201A"
+                      strokeWidth="1"
+                      strokeDasharray="2 2"
+                    />
+                    <rect x="-70" y="-52" width="140" height="20" fill="#13201A" />
+                    <text
+                      x="0"
+                      y="-38"
+                      textAnchor="middle"
+                      fill="#FAF9F5"
+                      className="font-label-sm text-[10px] uppercase font-bold tracking-wider"
+                    >
+                      Peak: {peakPoint.date} ({Math.round(peakPoint.predicted_demand)}u)
+                    </text>
+                  </g>
+                )}
 
-                {/* X-Axis Dates */}
-                <text x="60" y="325" className="fill-[#737875] font-label-sm text-[10px]">Jun 19</text>
-                <text x="210" y="325" className="fill-[#737875] font-label-sm text-[10px]">Jun 26</text>
-                <text x="360" y="325" className="fill-[#737875] font-label-sm text-[10px]">Jul 03</text>
-                <text x="510" y="325" className="fill-[#737875] font-label-sm text-[10px]">Jul 10</text>
-                <text x="660" y="325" className="fill-[#13201A] font-label-sm text-[11px] font-bold">JUL 17 (ORIGIN)</text>
-                <text x="810" y="325" className="fill-[#416659] font-label-sm text-[11px] font-bold">JUL 22 (PEAK)</text>
-                <text x="960" y="325" className="fill-[#416659] font-label-sm text-[10px]">Jul 30</text>
+                {/* X-Axis Dynamic Dates */}
+                {histDateTicks.map((lbl, idx) => (
+                  <text
+                    key={idx}
+                    x={lbl.x}
+                    y="325"
+                    className="fill-[#737875] font-label-sm text-[10px]"
+                  >
+                    {lbl.label}
+                  </text>
+                ))}
+                <text
+                  x={ORIGIN_X}
+                  y="325"
+                  textAnchor="middle"
+                  className="fill-[#13201A] font-label-sm text-[10px] font-bold"
+                >
+                  ORIGIN ({originDate.slice(5)})
+                </text>
+                {peakPoint && Math.abs(peakPoint.x - ORIGIN_X) >= 70 && (
+                  <text
+                    x={peakPoint.x}
+                    y="325"
+                    textAnchor="middle"
+                    className="fill-[#416659] font-label-sm text-[10px] font-bold"
+                  >
+                    PEAK ({peakPoint.date.slice(5)})
+                  </text>
+                )}
+                {fcPoints.length > 0 && (
+                  <text
+                    x={FORECAST_END_X}
+                    y="325"
+                    textAnchor="end"
+                    className="fill-[#416659] font-label-sm text-[10px]"
+                  >
+                    {fcPoints[fcPoints.length - 1].date.slice(5)}
+                  </text>
+                )}
               </svg>
             </div>
           </div>
@@ -429,7 +660,7 @@ export default function DemandForecastPage() {
                 Tabular Projections · Store 1
               </span>
               <h2 className="font-headline-sm text-base font-semibold text-[#13201A]">
-                {horizonDays}-Day Forward Validation Schedule (Jul 17 – Aug 15, 2017)
+                {horizonDays}-Day Forward Validation Schedule ({forecastStartDate} – {forecastEndDate})
               </h2>
             </div>
             <button
@@ -454,7 +685,7 @@ export default function DemandForecastPage() {
               </thead>
               <tbody className="divide-y divide-[#C3C8C3]/60 font-body-sm text-xs text-[#1B1C17]">
                 {forecastData?.daily_forecasts.map((d) => {
-                  const isPeak = peakDay?.step === d.step;
+                  const isPeak = peakPoint?.step === d.step;
                   return (
                     <tr
                       key={d.step}
@@ -511,7 +742,7 @@ export default function DemandForecastPage() {
                   {Math.round(cumulativeDemand).toLocaleString()} Units
                 </span>
                 <span className="font-body-sm text-xs text-[#416659] mt-0.5">
-                  Jul 17 – Aug 15, 2017
+                  {forecastStartDate} – {forecastEndDate}
                 </span>
               </div>
               <div className="flex flex-col">
@@ -519,10 +750,15 @@ export default function DemandForecastPage() {
                   Peak Projected Day
                 </span>
                 <span className="font-headline-sm text-base font-bold text-[#13201A] mt-1">
-                  {peakDay?.date || "Saturday, Jul 22"}
+                  {peakPoint?.date || peakDay?.date || "Saturday, Jul 22"}
                 </span>
                 <span className="font-data-tabular-md text-xs text-[#416659] font-medium mt-0.5">
-                  {peakDay ? Math.round(peakDay.predicted_demand).toLocaleString() : "1,680"} units projected
+                  {peakPoint
+                    ? Math.round(peakPoint.predicted_demand).toLocaleString()
+                    : peakDay
+                    ? Math.round(peakDay.predicted_demand).toLocaleString()
+                    : "1,680"}{" "}
+                  units projected
                 </span>
               </div>
             </div>
@@ -571,17 +807,17 @@ export default function DemandForecastPage() {
                 <div className="border border-[#C3C8C3] p-2 text-center bg-[#FAF9F5]">
                   <span className="font-label-sm text-[10px] uppercase text-[#737875] block">WAPE</span>
                   <span className="font-data-tabular-lg text-lg font-bold text-[#416659]">10.69%</span>
-                  <span className="font-label-sm text-[9px] text-[#737875] block">Weighted Error</span>
+                  <span className="font-label-sm text-[9px] text-[#737875] block">Global Benchmark</span>
                 </div>
                 <div className="border border-[#C3C8C3] p-2 text-center bg-[#FAF9F5]">
                   <span className="font-label-sm text-[10px] uppercase text-[#737875] block">MAE</span>
                   <span className="font-data-tabular-md text-sm font-bold text-[#13201A] mt-0.5 block">50.913</span>
-                  <span className="font-label-sm text-[9px] text-[#737875] block">units</span>
+                  <span className="font-label-sm text-[9px] text-[#737875] block">units (Holdout)</span>
                 </div>
                 <div className="border border-[#C3C8C3] p-2 text-center bg-[#FAF9F5]">
                   <span className="font-label-sm text-[10px] uppercase text-[#737875] block">RMSE</span>
                   <span className="font-data-tabular-md text-sm font-bold text-[#13201A] mt-0.5 block">103.876</span>
-                  <span className="font-label-sm text-[9px] text-[#737875] block">units</span>
+                  <span className="font-label-sm text-[9px] text-[#737875] block">units (Holdout)</span>
                 </div>
               </div>
             </div>
